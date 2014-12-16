@@ -72,3 +72,5 @@ e.g. http://sandbox.hortonworks.com:9999/tree
 ```
 ipython notebook --profile spark
 ```
+
+![Image](../master/screenshots/ipython-notebook-home.png?raw=true)
