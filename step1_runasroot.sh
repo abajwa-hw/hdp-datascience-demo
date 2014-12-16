@@ -4,7 +4,7 @@ echo "Stopping Oozie..."
 su -l oozie -c "cd /var/log/oozie; /usr/lib/oozie/bin/oozied.sh stop"
 
 echo "Stopping WebHCat..."
-su -l hcat -c "/usr/lib/hcatalog/sbin/webhcat_server.sh stop"
+su -l hcat -c "/usr/lib/hive-hcatalog/sbin/webhcat_server.sh stop"
 
 echo "Stopping Tez..."
 su -l tez -c "/usr/lib/tez/sbin/tez-daemon.sh stop ampoolservice"
