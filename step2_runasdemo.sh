@@ -1,4 +1,5 @@
 HOME_DIR=$1
+git clone https://github.com/abajwa-hw/hdp-datascience-demo.git 
 
 echo 'M2_HOME=/usr/share/maven/latest' >> ~/.bashrc
 echo 'M2=$M2_HOME/bin' >> ~/.bashrc

@@ -29,9 +29,11 @@ vi /Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwar
 ssh root@sandbox.hortonworks.com
 ```
 - Make the below YARN config changes via Ambari and restart YARN
+```
 yarn.scheduler.minimum-allocation-mb = 2560
 yarn.scheduler.maximum-allocation-mb = 10240
 yarn.nodemanager.resource.memory-mb = 10240
+```
 
 - Pull latest code/scripts
 ```

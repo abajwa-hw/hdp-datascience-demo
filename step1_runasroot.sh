@@ -1,4 +1,4 @@
-HOME_DIR=$1
+HOME_DIR=/home/demo
 
 #add demo user and create home dir
 useradd -m -d $HOME_DIR -G users demo 
