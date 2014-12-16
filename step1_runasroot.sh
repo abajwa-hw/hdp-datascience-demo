@@ -1,4 +1,3 @@
-set -e
 
 echo "Stopping Oozie..."
 su -l oozie -c "cd /var/log/oozie; /usr/lib/oozie/bin/oozied.sh stop"
@@ -11,6 +10,8 @@ su -l tez -c "/usr/lib/tez/sbin/tez-daemon.sh stop ampoolservice"
 
 echo "Stopping Hive..."
 ps aux | awk '{print $1,$2}' | grep hive | awk '{print $2}' | xargs kill >/dev/null 2>&1
+
+set -e
 
 #install mvn as root
 mkdir /usr/share/maven
