@@ -1,11 +1,11 @@
 ## Machine learning workshop demo
 
 #### Predicting Flight Delays 
-
+Scenario:
 Every year approximately 20% of airline flights are delayed or cancelled, resulting in significant costs to both travelers and airlines. 
 As our example use-case, we will build a supervised learning model that predicts airline delay from historical flight data and weather information.
 
-For more info refer to below:
+More details can be found on the below Hortonworks blog posts:
 - http://hortonworks.com/blog/data-science-apacheh-hadoop-predicting-airline-delays/
 - http://hortonworks.com/blog/data-science-hadoop-spark-scala-part-2/
 
@@ -59,6 +59,8 @@ sudo /home/demo/hdp-datascience-demo/step1_runasroot.sh
 /home/demo/hdp-datascience-demo/step2_runasdemo.sh
 
 ```
+
+##### Launch demo
 
 To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb
 e.g. http://sandbox.hortonworks.com:9999
