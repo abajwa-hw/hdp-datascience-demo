@@ -35,7 +35,22 @@ yarn.scheduler.maximum-allocation-mb = 10240
 yarn.nodemanager.resource.memory-mb = 10240
 ```
 
-- Pull latest code/scripts
+- Create demo user
 ```
+#add demo user and create home dir
+useradd -m -d /home/demo -G users demo 
+echo "demo:demo" | chpasswd
+cp /etc/sudoers /etc/sudoers.bak
+echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+
+```
+
+As demo user, setup the demo
+```
+su demo
+cd
 git clone https://github.com/abajwa-hw/hdp-datascience-demo.git	
+
+sudo ./hdp-datascience-demo/step1_runasroot.sh
+
 ```

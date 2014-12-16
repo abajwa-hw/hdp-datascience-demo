@@ -1,16 +1,11 @@
-HOME_DIR=/home/demo
+set -e
 
-#add demo user and create home dir
-useradd -m -d $HOME_DIR -G users demo 
-echo "demo:demo" | chpasswd
-cp /etc/sudoers /etc/sudoers.bak
-echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
-
-#add demo user and create home dir
-useradd -m -d $HOME_DIR -G users demo 
-echo "demo:demo" | chpasswd
-cp /etc/sudoers /etc/sudoers.bak
-echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+#install mvn as root
+mkdir /usr/share/maven
+cd /usr/share/maven
+wget http://www.carfab.com/apachesoftware/maven/maven-3/3.2.2/binaries/apache-maven-3.2.2-bin.tar.gz
+tar xvzf apache-maven-3.2.2-bin.tar.gz
+ln -s /usr/share/maven/apache-maven-3.2.2/ /usr/share/maven/latest
 
 yum update -y --skip-broken
 yum install gcc gcc-c++ gcc-gfortran -y
@@ -23,12 +18,4 @@ yum install lapack lapack-devel blas blas-devel -y
 yum install java-1.7.0-openjdk-devel -y
 wget -P /etc/yum.repos.d/ http://petersen.fedorapeople.org/pandoc-standalone/pandoc-standalone.repo
 yum install pandoc pandoc-citeproc -y
-
-
-#install mvn as root
-mkdir /usr/share/maven
-cd /usr/share/maven
-wget http://www.carfab.com/apachesoftware/maven/maven-3/3.2.2/binaries/apache-maven-3.2.2-bin.tar.gz
-tar xvzf apache-maven-3.2.2-bin.tar.gz
-ln -s /usr/share/maven/apache-maven-3.2.2/ /usr/share/maven/latest
 
