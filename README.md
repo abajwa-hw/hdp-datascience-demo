@@ -46,14 +46,14 @@ echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
 ```
 
-As demo user, install needed software and setup the demo
+As demo user, install needed software and setup the demo. This may run for 30+min
 ```
 su demo
 cd
 #pull latest code and setup scripts
 git clone https://github.com/abajwa-hw/hdp-datascience-demo.git	
 
-#execute yum install steps that require root 
+#execute yum install steps that require root. Also bring down unnecessary services to save VM memory
 sudo ./hdp-datascience-demo/step1_runasroot.sh
 
 #install python etc and setup demo
@@ -62,13 +62,13 @@ sudo ./hdp-datascience-demo/step1_runasroot.sh
 ```
 
 To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb
-e.g. http://sandbox.hortonworks.com:9999/tree
+e.g. http://sandbox.hortonworks.com:9999
 ```
 ipython notebook
 ```
 
 To run the Scala/Spark demo execute below then point your browser to port where ipython notebook starts on and open airline_spark.ipynb
-e.g. http://sandbox.hortonworks.com:9999/tree
+e.g. http://sandbox.hortonworks.com:9999
 ```
 ipython notebook --profile spark
 ```
