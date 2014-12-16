@@ -1,5 +1,9 @@
-HOME_DIR=$1
+set -e
 git clone https://github.com/abajwa-hw/hdp-datascience-demo.git 
+#HOME_DIR=$1
+HOME_DIR=/home/demo
+PROJECT_DIR=$HOME_DIR/hdp-datascience-demo
+
 
 echo 'M2_HOME=/usr/share/maven/latest' >> ~/.bashrc
 echo 'M2=$M2_HOME/bin' >> ~/.bashrc
@@ -8,7 +12,6 @@ echo 'PATH=$PATH:$M2' >> ~/.bashrc
 export M2_HOME=/usr/share/maven/latest
 export M2=$M2_HOME/bin
 export PATH=$PATH:$M2
-
 
 #install sqllite
 echo "Installing SQLlite"
@@ -25,7 +28,8 @@ cd $HOME_DIR
 wget https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tar.xz 
 xz -d Python-2.7.8.tar.xz && tar -xvf Python-2.7.8.tar 
 cd Python-2.7.8 
-./configure --prefix=$HOME_DIR/.python LDFLAGS='-L$HOME_DIR/sqlite-autoconf-3080600/.libs' CPPFLAGS='-I$HOME_DIR/sqlite-autoconf-3080600/' 
+#./configure --prefix=$HOME_DIR/.python LDFLAGS='-L$HOME_DIR/sqlite-autoconf-3080600/.libs' CPPFLAGS='-I$HOME_DIR/sqlite-autoconf-3080600/' 
+./configure --prefix=$HOME_DIR/.python LDFLAGS='-L/home/demo/sqlite-autoconf-3080600/.libs' CPPFLAGS='-I/home/demo/sqlite-autoconf-3080600/' 
 make && make altinstall
 
 # Install Python’s package management: easy_install and pip
@@ -76,11 +80,13 @@ cd pydoop-0.12.0
 
 #https://github.com/ZEMUSHKA/pydoop/commit/414a2e52390a873e4766633891190ffede937d90
 #vi pydoop/hadoop_utils.py 
-cp -f $HOME_DIR/setup/hadoop_utils.py $HOME_DIR/pydoop-0.12.0/pydoop
+mv $HOME_DIR/pydoop-0.12.0/pydoop/hadoop_utils.py $HOME_DIR/pydoop-0.12.0/pydoop/hadoop_utils.py.bak
+cp -f $PROJECT_DIR/setup/hadoop_utils.py $HOME_DIR/pydoop-0.12.0/pydoop
 
 #https://github.com/ZEMUSHKA/pydoop/commit/e3d3378ae9921561f6c600c79364c2ad42ec206d
 #vi setup.py
-cp -f $HOME_DIR/setup/setup.py $HOME_DIR/pydoop-0.12.0
+mv $HOME_DIR/pydoop-0.12.0/setup.py $HOME_DIR/pydoop-0.12.0/setup.py.bak
+cp -f $PROJECT_DIR/setup/setup.py $HOME_DIR/pydoop-0.12.0
 
 if [ -e /usr/hdp/2.2*/hadoop/bin/hdfs ]
 then
@@ -149,13 +155,10 @@ echo "sys.path.insert(0, os.path.join(spark_home, ‘python’)) " >> $HOME_DIR/
 echo "sys.path.insert(0, os.path.join(spark_home, ‘python/lib/py4j-0.8.1-src.zip’)) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "execfile(os.path.join(spark_home, ‘python/pyspark/shell.py’))" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 
-#Transfer demo.zip to $HOME_DIR and unzip
-cd
-unzip demo.zip
 
 #Get the data files
 echo "Downloading delay data...."
-cd $HOME_DIR/demo
+cd $PROJECT_DIR/demo
 mkdir airline
 cd airline
 mkdir delay
@@ -166,9 +169,9 @@ wget http://stat-computing.org/dataexpo/2009/2008.csv.bz2
 bzip2 -d 2008.csv.bz2
 
 echo "Downloading weather data...."
-cd $HOME_DIR/demo/airline
+cd $PROJECT_DIR/demo/airline
 mkdir weather
-cd  $HOME_DIR/demo/airline/weather
+cd  $PROJECT_DIR/demo/airline/weather
 wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2007.csv.gz
 gunzip -d 2007.csv.gz
 wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2008.csv.gz
@@ -183,7 +186,7 @@ hadoop fs -mkdir /user/demo/airline/weather
 hadoop fs -put $HOME_DIR/demo/airline/delay/*.csv /user/demo/airline/delay
 hadoop fs -put $HOME_DIR/demo/airline/weather/*.csv /user/demo/airline/weather
 
-cd $HOME_DIR/demo
+cd $PROJECT_DIR/demo
 
 echo "The demo setup is complete" 
 echo "To run the python demo execute"
