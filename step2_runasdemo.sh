@@ -197,11 +197,13 @@ cd $PROJECT_DIR/demo
 echo "The demo setup is complete" 
 echo "To run the python demo execute"
 echo "source ~/.bashrc"
+echo "cd /home/demo/hdp-datascience-demo/demo"
 echo "ipython notebook"
 echo "Then navigate to http://sandbox.hortonworks.com:<port>"
 echo ""
 echo "To run the Scala/Spark demo execute"
 echo "source ~/.bashrc"
+echo "cd /home/demo/hdp-datascience-demo/demo"
 echo "ipython notebook --profile spark"
 echo "Then navigate to http://sandbox.hortonworks.com:<port>"
 

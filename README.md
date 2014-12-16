@@ -63,7 +63,9 @@ sudo /home/demo/hdp-datascience-demo/step1_runasroot.sh
 To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb
 e.g. http://sandbox.hortonworks.com:9999
 ```
+
 source ~/.bashrc
+cd /home/demo/hdp-datascience-demo/demo
 ipython notebook
 ```
 
@@ -71,6 +73,7 @@ To run the Scala/Spark demo execute below then point your browser to port where 
 e.g. http://sandbox.hortonworks.com:9999
 ```
 source ~/.bashrc
+cd /home/demo/hdp-datascience-demo/demo
 ipython notebook --profile spark
 ```
 
