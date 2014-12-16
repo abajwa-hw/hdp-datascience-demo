@@ -53,10 +53,10 @@ cd
 git clone https://github.com/abajwa-hw/hdp-datascience-demo.git	
 
 #execute yum install steps that require root. Also bring down unnecessary services to save VM memory
-sudo ./hdp-datascience-demo/step1_runasroot.sh
+sudo /home/demo/hdp-datascience-demo/step1_runasroot.sh
 
 #install python etc and setup demo
-./hdp-datascience-demo/step2_runasdemo.sh
+/home/demo/hdp-datascience-demo/step2_runasdemo.sh
 
 ```
 
