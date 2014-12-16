@@ -155,9 +155,18 @@ echo "sys.path.insert(0, os.path.join(spark_home, ‘python’)) " >> $HOME_DIR/
 echo "sys.path.insert(0, os.path.join(spark_home, ‘python/lib/py4j-0.8.1-src.zip’)) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "execfile(os.path.join(spark_home, ‘python/pyspark/shell.py’))" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 
+cd $HOME_DIR
+rm -f *.tgz *.gz *.zip *.tar
 
-#Get the data files
-echo "Downloading delay data...."
+#create HDFS dirs
+sudo -u hdfs hadoop fs -mkdir /user/demo
+sudo -u hdfs hadoop fs -chown demo:demo /user/demo
+hadoop fs -mkdir /user/demo/airline
+hadoop fs -mkdir /user/demo/airline/delay
+hadoop fs -mkdir /user/demo/airline/weather
+
+#Get the data files and upload to HDFS
+echo "Downloading delay data to HDFS...."
 cd $PROJECT_DIR/demo
 mkdir airline
 cd airline
@@ -167,8 +176,11 @@ wget http://stat-computing.org/dataexpo/2009/2007.csv.bz2
 bzip2 -d 2007.csv.bz2
 wget http://stat-computing.org/dataexpo/2009/2008.csv.bz2
 bzip2 -d 2008.csv.bz2
+hadoop fs -put $PROJECT_DIR/demo/airline/delay/*.csv /user/demo/airline/delay
+#delete copy of data from local FS to save space
+rm $PROJECT_DIR/demo/airline/delay/*.csv
 
-echo "Downloading weather data...."
+echo "Downloading weather data to HDFS...."
 cd $PROJECT_DIR/demo/airline
 mkdir weather
 cd  $PROJECT_DIR/demo/airline/weather
@@ -176,24 +188,18 @@ wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2007.csv.gz
 gunzip -d 2007.csv.gz
 wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2008.csv.gz
 gunzip -d 2008.csv.gz
-
-
-sudo -u hdfs hadoop fs -mkdir /user/demo
-sudo -u hdfs hadoop fs -chown demo:demo /user/demo
-hadoop fs -mkdir /user/demo/airline
-hadoop fs -mkdir /user/demo/airline/delay
-hadoop fs -mkdir /user/demo/airline/weather
-hadoop fs -put $HOME_DIR/demo/airline/delay/*.csv /user/demo/airline/delay
-hadoop fs -put $HOME_DIR/demo/airline/weather/*.csv /user/demo/airline/weather
+hadoop fs -put $PROJECT_DIR/demo/airline/weather/*.csv /user/demo/airline/weather
+#delete copy of data from local FS to save space
+rm $PROJECT_DIR/demo/airline/weather/*.csv
 
 cd $PROJECT_DIR/demo
 
 echo "The demo setup is complete" 
 echo "To run the python demo execute"
 echo "ipython notebook"
-echo "Then navigate to http://sandbox.hortonworks.com:9999/tree"
+echo "Then navigate to http://sandbox.hortonworks.com:9999"
 echo ""
 echo "To run the Scala/Spark demo execute"
 echo "ipython notebook --profile spark"
-echo "Then navigate to http://sandbox.hortonworks.com:8888/tree"
+echo "Then navigate to http://sandbox.hortonworks.com:8888"
 

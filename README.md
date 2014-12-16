@@ -15,6 +15,7 @@ These setup steps are only needed first time
 
 - Download HDP 2.1 sandbox VM image (Hortonworks_Sandbox_2.1.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Hortonworks_Sandbox_2.1.ova into VMWare
+- In the "Hard Disk" settings set disk size to 65GB
 - Before starting the VM, open the .vmx file and set numvcpus = "4" and memsize = "16000". Then start the VM
 ```
 vi /Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwarevm 
@@ -34,7 +35,7 @@ yarn.scheduler.minimum-allocation-mb = 2560
 yarn.scheduler.maximum-allocation-mb = 10240
 yarn.nodemanager.resource.memory-mb = 10240
 ```
-
+- In Ambari, shutdown unneeded services to save memory e.g. Oozie, Falcon, WebHCat, Ganglia, Nagios
 - Create demo user
 ```
 #add demo user and create home dir
@@ -45,12 +46,29 @@ echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
 ```
 
-As demo user, setup the demo
+As demo user, install needed software and setup the demo
 ```
 su demo
 cd
+#pull latest code and setup scripts
 git clone https://github.com/abajwa-hw/hdp-datascience-demo.git	
 
+#execute yum install steps that require root 
 sudo ./hdp-datascience-demo/step1_runasroot.sh
 
+#install python etc and setup demo
+./hdp-datascience-demo/step2_runasdemo.sh
+
+```
+
+To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb
+e.g. http://sandbox.hortonworks.com:9999/tree
+```
+ipython notebook
+```
+
+To run the Scala/Spark demo execute below then point your browser to port where ipython notebook starts on and open airline_spark.ipynb
+e.g. http://sandbox.hortonworks.com:9999/tree
+```
+ipython notebook --profile spark
 ```
