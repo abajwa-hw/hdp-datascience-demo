@@ -35,7 +35,6 @@ yarn.scheduler.minimum-allocation-mb = 2560
 yarn.scheduler.maximum-allocation-mb = 10240
 yarn.nodemanager.resource.memory-mb = 10240
 ```
-- In Ambari, shutdown unneeded services to save memory e.g. Oozie, Falcon, WebHCat, Ganglia, Nagios
 - Create demo user
 ```
 #add demo user and create home dir
