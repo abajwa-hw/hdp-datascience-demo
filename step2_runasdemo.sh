@@ -1,5 +1,5 @@
 set -e
-git clone https://github.com/abajwa-hw/hdp-datascience-demo.git 
+
 #HOME_DIR=$1
 HOME_DIR=/home/demo
 PROJECT_DIR=$HOME_DIR/hdp-datascience-demo
