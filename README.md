@@ -32,9 +32,10 @@ ssh root@sandbox.hortonworks.com
 ```
 - Make the below YARN config changes via Ambari and restart YARN
 ```
-yarn.scheduler.minimum-allocation-mb = 1536 #2560 in 2.2
-yarn.scheduler.maximum-allocation-mb = 4608 #10240 in 2.2
-yarn.nodemanager.resource.memory-mb = 4608 #10240 in 2.2
+yarn.nodemanager.resource.memory-mb = 9216 
+yarn.scheduler.minimum-allocation-mb = 1536
+yarn.scheduler.maximum-allocation-mb = 9216
+
 ```
 - Create demo user
 ```
