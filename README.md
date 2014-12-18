@@ -25,9 +25,10 @@ vi /Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwar
 ```
 192.168.191.241 sandbox.hortonworks.com sandbox    
 ```
-- Connect to the VM via SSH (password hadoop)
+- Connect to the VM via SSH (password hadoop) and start Ambari server
 ```
 ssh root@sandbox.hortonworks.com
+/root/start_ambari.sh
 ```
 - Make the below YARN config changes via Ambari and restart YARN
 ```
