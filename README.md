@@ -9,6 +9,9 @@ More details can be found on the below Hortonworks blog posts:
 - http://hortonworks.com/blog/data-science-apacheh-hadoop-predicting-airline-delays/
 - http://hortonworks.com/blog/data-science-hadoop-spark-scala-part-2/
 
+To get a better understanding of machine learning and how the models below work:
+https://www.coursera.org/course/ml
+
 ##### Setup demo
 
 These setup steps are only needed first time
