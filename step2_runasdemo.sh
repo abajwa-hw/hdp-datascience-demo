@@ -99,7 +99,7 @@ fi
 export JDK_VER=`ls /usr/jdk64/`
 export JAVA_HOME=/usr/jdk64/$JDK_VER
 echo "export HADOOP_HOME=$HADOOP_HOME" >> $HOME_DIR/.bashrc
-echo "export HADOOP_HOME=$HADOOP_VERSION" >> $HOME_DIR/.bashrc
+echo "export HADOOP_VERSION=$HADOOP_VERSION" >> $HOME_DIR/.bashrc
 echo "export JAVA_HOME=/usr/jdk64/$JDK_VER"  >> $HOME_DIR/.bashrc 
  
 # build PyDoop 
