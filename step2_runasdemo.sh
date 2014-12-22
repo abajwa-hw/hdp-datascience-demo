@@ -91,7 +91,8 @@ cp -f $PROJECT_DIR/setup/setup.py $HOME_DIR/pydoop-0.12.0
 if [ -e /usr/hdp/2.2*/hadoop/bin/hdfs ]
 then
 	export HADOOP_HOME=/usr/hdp/2.2*/hadoop
-	export HADOOP_VERSION=hadoop-2.2.0
+	#export HADOOP_VERSION=hadoop-2.2.0
+	export HADOOP_VERSION=2.6.0.2.2.0.0-2041
 else
 	export HADOOP_HOME=/usr/lib/hadoop
 fi
