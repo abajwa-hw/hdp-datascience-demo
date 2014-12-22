@@ -23,8 +23,8 @@ These setup steps are only needed first time
 - In the "Hard Disk" settings set disk size to 65GB
 - Before starting the VM, open the .vmx file and set numvcpus = "4" and memsize = "16000". Then start the VM
 ```
-vi /Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwarevm 
-
+#e.g. if you are using VMWare Fusion on OSX 
+vi "/Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwarevm/<your VMname>.vmx"
 ```
 - Find the IP address of the VM and add an entry into your machines hosts file e.g.
 ```
