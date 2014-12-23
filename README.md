@@ -15,7 +15,7 @@ To get a better understanding of machine learning and how the models below work:
 - https://www.coursera.org/course/ml
 
 ##### Setup demo - Option 1: Import prebuilt VM
-We have built a VM with the demo starting with a HDP 2.1 sandbox [here](https://dl.dropboxusercontent.com/u/114020/Hortonworks_2.2_GA.ova)
+We have built a VM with the demo starting with a HDP 2.1 sandbox here
 
 You can simply import it into VMware Fusion, start the VM and follow the instructions in the readme under /root
 
