@@ -13,6 +13,31 @@ export M2_HOME=/usr/share/maven/latest
 export M2=$M2_HOME/bin
 export PATH=$PATH:$M2
 
+#2.2 specific vars that need to be set
+if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+then
+	export HADOOP_HOME=/usr/hdp/2.2.0.0-2041/hadoop
+	export HADOOP_VERSION=2.6.0.2.2.0.0-2041
+	export HDP_VERSION=2.2
+else
+	export HADOOP_HOME=/usr/lib/hadoop
+	export HDP_VERSION=2.1
+fi
+
+export PYTHONPATH=/usr/lib/python2.6/site-packages
+export JDK_VER=`ls /usr/jdk64/`
+export JAVA_HOME=/usr/jdk64/$JDK_VER
+export YARN_CONF_DIR=/etc/hadoop/conf
+export HADOOP_CONF_DIR=/etc/hadoop/conf
+
+echo "export HADOOP_HOME=$HADOOP_HOME" >> $HOME_DIR/.bashrc
+echo "export HADOOP_VERSION=$HADOOP_VERSION" >> $HOME_DIR/.bashrc
+echo "export PYTHONPATH=$PYTHONPATH" >> $HOME_DIR/.bashrc
+echo "export JAVA_HOME=/usr/jdk64/$JDK_VER"  >> $HOME_DIR/.bashrc 
+echo "export YARN_CONF_DIR=/etc/hadoop/conf" >> ~/.bashrc
+echo "export HADOOP_CONF_DIR=/etc/hadoop/conf" >> ~/.bashrc
+
+
 #install sqllite
 echo "Installing SQLlite"
 cd $HOME_DIR 
@@ -42,10 +67,13 @@ wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
 # Install and activate VirtualEnv
 echo "Installing python virtualenv..."
 .python/bin/pip2.7 install virtualenv 
-.python/bin/virtualenv-2.7 pyenv 
+.python/bin/virtualenv pyenv
 chmod +x ./pyenv/bin/activate 
 source ./pyenv/bin/activate
 echo "source $HOME_DIR/pyenv/bin/activate" >> $HOME_DIR/.bashrc
+
+#if [ "$HDP_VERSION" == "2.2" ]
+#then
 
 
 #Install data-science related Python package - this can take 10min
@@ -67,10 +95,12 @@ sudo cp -v -R docs/* /usr/share/doc/freetype-2.5.0
 
 cd $HOME_DIR
 source ./pyenv/bin/activate
-pip install matplotlib
 
 # Install ipython
 easy_install ipython
+easy_install -U distribute
+
+pip install matplotlib
 
 #Install PYDOOP – package to enable Hadoop access from Python.
 echo "Installing pydoop..."
@@ -88,20 +118,7 @@ cp -f $PROJECT_DIR/setup/hadoop_utils.py $HOME_DIR/pydoop-0.12.0/pydoop
 mv $HOME_DIR/pydoop-0.12.0/setup.py $HOME_DIR/pydoop-0.12.0/setup.py.bak
 cp -f $PROJECT_DIR/setup/setup.py $HOME_DIR/pydoop-0.12.0
 
-if [ -e /usr/hdp/2.2*/hadoop/bin/hdfs ]
-then
-	export HADOOP_HOME=/usr/hdp/2.2*/hadoop
-	#export HADOOP_VERSION=hadoop-2.2.0
-	export HADOOP_VERSION=2.6.0.2.2.0.0-2041
-else
-	export HADOOP_HOME=/usr/lib/hadoop
-fi
 
-export JDK_VER=`ls /usr/jdk64/`
-export JAVA_HOME=/usr/jdk64/$JDK_VER
-echo "export HADOOP_HOME=$HADOOP_HOME" >> $HOME_DIR/.bashrc
-echo "export HADOOP_VERSION=$HADOOP_VERSION" >> $HOME_DIR/.bashrc
-echo "export JAVA_HOME=/usr/jdk64/$JDK_VER"  >> $HOME_DIR/.bashrc 
  
 # build PyDoop 
 python setup.py build 
@@ -140,11 +157,7 @@ echo "Downloading Spark..."
 cd
 wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.1.0/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
 tar xvfz spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
-export YARN_CONF_DIR=/etc/hadoop/conf
 export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695
-export HADOOP_CONF_DIR=/etc/hadoop/conf
-echo "export YARN_CONF_DIR=/etc/hadoop/conf" >> ~/.bashrc
-echo "export HADOOP_CONF_DIR=/etc/hadoop/conf" >> ~/.bashrc
 echo "export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695" >> ~/.bashrc
 
 
@@ -156,45 +169,6 @@ echo "spark_home = os.environ.get(‘SPARK_HOME’, None) " >> $HOME_DIR/.ipytho
 echo "sys.path.insert(0, os.path.join(spark_home, ‘python’)) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "sys.path.insert(0, os.path.join(spark_home, ‘python/lib/py4j-0.8.1-src.zip’)) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "execfile(os.path.join(spark_home, ‘python/pyspark/shell.py’))" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-
-cd $HOME_DIR
-rm -f *.tgz *.gz *.zip *.tar
-
-#create HDFS dirs
-sudo -u hdfs hadoop fs -mkdir /user/demo
-sudo -u hdfs hadoop fs -chown demo:demo /user/demo
-hadoop fs -mkdir /user/demo/airline
-hadoop fs -mkdir /user/demo/airline/delay
-hadoop fs -mkdir /user/demo/airline/weather
-
-#Get the data files and upload to HDFS
-echo "Downloading delay data to HDFS...."
-cd $PROJECT_DIR/demo
-mkdir airline
-cd airline
-mkdir delay
-cd delay
-wget http://stat-computing.org/dataexpo/2009/2007.csv.bz2
-bzip2 -d 2007.csv.bz2
-wget http://stat-computing.org/dataexpo/2009/2008.csv.bz2
-bzip2 -d 2008.csv.bz2
-hadoop fs -put $PROJECT_DIR/demo/airline/delay/*.csv /user/demo/airline/delay
-#delete copy of data from local FS to save space
-rm $PROJECT_DIR/demo/airline/delay/*.csv
-
-echo "Downloading weather data to HDFS...."
-cd $PROJECT_DIR/demo/airline
-mkdir weather
-cd  $PROJECT_DIR/demo/airline/weather
-wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2007.csv.gz
-gunzip -d 2007.csv.gz
-wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2008.csv.gz
-gunzip -d 2008.csv.gz
-hadoop fs -put $PROJECT_DIR/demo/airline/weather/*.csv /user/demo/airline/weather
-#delete copy of data from local FS to save space
-rm $PROJECT_DIR/demo/airline/weather/*.csv
-
-cd $PROJECT_DIR/demo
 
 echo "The demo setup is complete" 
 echo "To run the python demo execute"
