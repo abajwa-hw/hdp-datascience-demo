@@ -160,8 +160,6 @@ tar xvfz spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
 export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695
 echo "export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695" >> ~/.bashrc
 
-
-
 #configure ~/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "import os" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "import sys" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
@@ -169,6 +167,45 @@ echo "spark_home = os.environ.get(‘SPARK_HOME’, None) " >> $HOME_DIR/.ipytho
 echo "sys.path.insert(0, os.path.join(spark_home, ‘python’)) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "sys.path.insert(0, os.path.join(spark_home, ‘python/lib/py4j-0.8.1-src.zip’)) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "execfile(os.path.join(spark_home, ‘python/pyspark/shell.py’))" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
+
+cd $HOME_DIR
+rm -f *.tgz *.gz *.zip *.tar
+
+#create HDFS dirs
+sudo -u hdfs hadoop fs -mkdir /user/demo
+sudo -u hdfs hadoop fs -chown demo:demo /user/demo
+hadoop fs -mkdir /user/demo/airline
+hadoop fs -mkdir /user/demo/airline/delay
+hadoop fs -mkdir /user/demo/airline/weather
+
+#Get the data files and upload to HDFS
+echo "Downloading delay data to HDFS...."
+cd $PROJECT_DIR/demo
+mkdir airline
+cd airline
+mkdir delay
+cd delay
+wget http://stat-computing.org/dataexpo/2009/2007.csv.bz2
+bzip2 -d 2007.csv.bz2
+wget http://stat-computing.org/dataexpo/2009/2008.csv.bz2
+bzip2 -d 2008.csv.bz2
+hadoop fs -put $PROJECT_DIR/demo/airline/delay/*.csv /user/demo/airline/delay
+#delete copy of data from local FS to save space
+rm $PROJECT_DIR/demo/airline/delay/*.csv
+
+echo "Downloading weather data to HDFS...."
+cd $PROJECT_DIR/demo/airline
+mkdir weather
+cd  $PROJECT_DIR/demo/airline/weather
+wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2007.csv.gz
+gunzip -d 2007.csv.gz
+wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2008.csv.gz
+gunzip -d 2008.csv.gz
+hadoop fs -put $PROJECT_DIR/demo/airline/weather/*.csv /user/demo/airline/weather
+#delete copy of data from local FS to save space
+rm $PROJECT_DIR/demo/airline/weather/*.csv
+
+cd $PROJECT_DIR/demo
 
 echo "The demo setup is complete" 
 echo "To run the python demo execute"
