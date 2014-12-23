@@ -3,10 +3,10 @@ This demo is part of a 'Machine Learning with Hadoop' webinar.
 The webinar recording and slides are available at http://hortonworks.com/partners/learn
 
 #### Predicting Flight Delays 
-Scenario:
+Demo scenario:
 Every year approximately 20% of airline flights are delayed or cancelled, resulting in significant costs to both travelers and airlines. 
 As our example use-case, we will build a supervised learning model that predicts airline delay from historical flight data and weather information.
-
+Currently there are two versions of this demo available: one with Python/Scikit-learn and one with Spark/Scala (the R demo is being developed)
 More details can be found on the below Hortonworks blog posts:
 - http://hortonworks.com/blog/data-science-apacheh-hadoop-predicting-airline-delays/
 - http://hortonworks.com/blog/data-science-hadoop-spark-scala-part-2/
@@ -15,9 +15,11 @@ To get a better understanding of machine learning and how the models below work:
 - https://www.coursera.org/course/ml
 
 ##### Setup demo - Option 1: Import prebuilt VM
-We have built a VM with the demo starting with a HDP 2.1 sandbox [here](https://dl.dropboxusercontent.com/u/114020/Hortonworks_Sandbox_2.1_MLdemo.ova) (Currently uploading)
+There is a prebuilt VM with the demo running on a HDP 2.1 sandbox [here](https://dl.dropboxusercontent.com/u/114020/Hortonworks_Sandbox_2.1_MLdemo.ova) 
 
 You can simply import it into VMware Fusion, start the VM and follow the instructions in the readme under /root
+
+A version of the demo VM running on HDP 2.2 sandbox is currently being worked on 
 
 ##### Setup demo - Option 2: Setup demo on 2.1 sandbox VM
 
