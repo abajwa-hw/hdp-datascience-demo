@@ -14,19 +14,41 @@ More details can be found on the below Hortonworks blog posts:
 To get a better understanding of machine learning and how the models below work:
 - https://www.coursera.org/course/ml
 
-##### Setup demo - Option 1: Import prebuilt VM
+##### Setup VM - Option 1: Import prebuilt VM
 There is a prebuilt VM with the demo running on a HDP 2.1 sandbox [here](https://dl.dropboxusercontent.com/u/114020/Hortonworks_Sandbox_2.1_MLdemo.ova) 
 
-You can simply import it into VMware Fusion, start the VM and follow the instructions in the readme under /root
+You can simply import it into VMware Fusion, start the VM and follow the instructions in the readme under /root. You do not need to follow the rest of the instructions below.
 
 A version of the demo VM running on HDP 2.2 sandbox is currently being worked on 
 
-##### Setup demo - Option 2: Setup demo on 2.1 sandbox VM
+##### Setup VM - Option 2: Setup demo on HDP 2.1 sandbox VM
 
 These setup steps are only needed first time
 
 - Download HDP 2.1 sandbox VM image (Hortonworks_Sandbox_2.1.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Hortonworks_Sandbox_2.1.ova into VMWare
+- Now follow demo setup instructions below
+
+##### Setup VM - Option 3: Setup demo on HDP 2.2 sandbox VM - only python demo supported for now
+
+- Download HDP 2.2 sandbox VM image (Sandbox_HDP_2.2_VMware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
+- Import Sandbox_HDP_2.2_VMware.ova into VMWare
+- Make the below Pig config changes via Ambari to enable Tez and restart Pig
+```
+#exectype=mapreduce
+exectype=tez
+```
+- Now follow demo setup instructions below
+
+##### Demo setup instructions
+
+- Make the below YARN config changes via Ambari and restart YARN
+```
+yarn.nodemanager.resource.memory-mb = 9216 
+yarn.scheduler.minimum-allocation-mb = 1536
+yarn.scheduler.maximum-allocation-mb = 9216
+```
+
 - In the "Hard Disk" settings set disk size to 65GB
 - Before starting the VM, open the .vmx file and set numvcpus = "4" and memsize = "16000". Then start the VM
 ```
@@ -42,13 +64,7 @@ vi "/Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwa
 ssh root@sandbox.hortonworks.com
 /root/start_ambari.sh
 ```
-- Make the below YARN config changes via Ambari and restart YARN
-```
-yarn.nodemanager.resource.memory-mb = 9216 
-yarn.scheduler.minimum-allocation-mb = 1536
-yarn.scheduler.maximum-allocation-mb = 9216
 
-```
 - Create demo user
 ```
 #add demo user and create home dir
@@ -76,7 +92,7 @@ sudo /home/demo/hdp-datascience-demo/step1_runasroot.sh
 
 ##### Launch demo
 
-To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb
+To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb (on HDP 2.1) or airline_python-2.2.ipynb (on HDP 2.2)
 e.g. http://sandbox.hortonworks.com:9999
 ```
 
