@@ -33,7 +33,7 @@ These setup steps are only needed first time
 
 - Download HDP 2.2 sandbox VM image (Sandbox_HDP_2.2_VMware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Sandbox_HDP_2.2_VMware.ova into VMWare
-- Make the below Pig config changes via Ambari to enable Tez and restart Pig
+- Make the below Pig config changes via Ambari to enable Tez and restart Pig. Also shutdown any non-critical components to conserve memory
 ```
 #exectype=mapreduce
 exectype=tez
