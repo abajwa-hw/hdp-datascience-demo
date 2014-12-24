@@ -59,7 +59,7 @@ ssh root@sandbox.hortonworks.com
 /root/start_ambari.sh
 ```
 
-- Make any config changes required via Ambari e.g. the below YARN config changes via Ambari and restart YARN (also the pig changes to enable Tez on 2.2)
+- Make any config changes required via Ambari e.g. the below YARN config changes via Ambari and restart YARN (also the pig changes described above to enable Tez if you are on 2.2)
 ```
 yarn.nodemanager.resource.memory-mb = 9216 
 yarn.scheduler.minimum-allocation-mb = 1536
