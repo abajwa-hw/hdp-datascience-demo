@@ -31,25 +31,18 @@ A version of the demo VM running on HDP 2.2 sandbox is currently being worked on
 
 - Download HDP 2.2 sandbox VM image (Sandbox_HDP_2.2_VMware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Sandbox_HDP_2.2_VMware.ova into VMWare
-- Make the below Pig config changes via Ambari to enable Tez and restart Pig. Also shutdown any non-critical components to conserve memory
+- Now follow demo setup instructions below
+- After bringing up Ambari, also make the below Pig config changes to enable Tez and restart Pig. Also shutdown any non-critical components to conserve memory
 ```
 #exectype=mapreduce
 exectype=tez
 ```
 ![Image](../master/screenshots/pig-tez.png?raw=true)
 
-- Now follow demo setup instructions below
 
 ##### Demo setup instructions
 
-- Make the below YARN config changes via Ambari and restart YARN
-```
-yarn.nodemanager.resource.memory-mb = 9216 
-yarn.scheduler.minimum-allocation-mb = 1536
-yarn.scheduler.maximum-allocation-mb = 9216
-```
-
-- In the "Hard Disk" settings set disk size to 65GB
+- Before starting the VM, in the "Hard Disk" VM settings set disk size to 65GB
 - Before starting the VM, open the .vmx file and set numvcpus = "4" and memsize = "16000". Then start the VM
 ```
 #e.g. if you are using VMWare Fusion on OSX 
@@ -63,6 +56,13 @@ vi "/Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwa
 ```
 ssh root@sandbox.hortonworks.com
 /root/start_ambari.sh
+```
+
+- Make any config changes required via Ambari e.g. the below YARN config changes via Ambari and restart YARN (also the pig changes to enable Tez on 2.2)
+```
+yarn.nodemanager.resource.memory-mb = 9216 
+yarn.scheduler.minimum-allocation-mb = 1536
+yarn.scheduler.maximum-allocation-mb = 9216
 ```
 
 - Create demo user
