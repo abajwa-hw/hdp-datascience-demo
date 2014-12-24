@@ -49,7 +49,7 @@ exectype=tez
 vi "/Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwarevm/<your VMname>.vmx"
 ```
 - Now start the VM
-- Find the IP address of the VM and add an entry into your machines hosts file e.g.
+- After it boots up, find the IP address of the VM and add an entry into your machines hosts file e.g.
 ```
 192.168.191.241 sandbox.hortonworks.com sandbox    
 ```
