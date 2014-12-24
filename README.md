@@ -29,7 +29,7 @@ These setup steps are only needed first time
 - Import Hortonworks_Sandbox_2.1.ova into VMWare
 - Now follow demo setup instructions below
 
-##### Setup VM - Option 3: Setup demo on HDP 2.2 sandbox VM - only python demo supported for now
+##### Setup VM - Option 3: Setup demo on HDP 2.2 sandbox VM - only python demo supported for now on 2.2
 
 - Download HDP 2.2 sandbox VM image (Sandbox_HDP_2.2_VMware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Sandbox_HDP_2.2_VMware.ova into VMWare
