@@ -43,11 +43,12 @@ exectype=tez
 ##### Demo setup instructions
 
 - Before starting the VM, in the "Hard Disk" VM settings set disk size to 65GB
-- Before starting the VM, open the .vmx file and set numvcpus = "4" and memsize = "16000". Then start the VM
+- Before starting the VM, open the .vmx file and set numvcpus = "4" and memsize = "16000"
 ```
 #e.g. if you are using VMWare Fusion on OSX 
 vi "/Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwarevm/<your VMname>.vmx"
 ```
+- Now start the VM
 - Find the IP address of the VM and add an entry into your machines hosts file e.g.
 ```
 192.168.191.241 sandbox.hortonworks.com sandbox    
