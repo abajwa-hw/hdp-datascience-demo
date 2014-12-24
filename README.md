@@ -38,6 +38,8 @@ These setup steps are only needed first time
 #exectype=mapreduce
 exectype=tez
 ```
+![Image](../master/screenshots/pig-tez.png?raw=true)
+
 - Now follow demo setup instructions below
 
 ##### Demo setup instructions
