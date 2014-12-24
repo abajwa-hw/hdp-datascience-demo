@@ -23,8 +23,6 @@ A version of the demo VM running on HDP 2.2 sandbox is currently being worked on
 
 ##### Setup VM - Option 2: Setup demo on HDP 2.1 sandbox VM
 
-These setup steps are only needed first time
-
 - Download HDP 2.1 sandbox VM image (Hortonworks_Sandbox_2.1.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Hortonworks_Sandbox_2.1.ova into VMWare
 - Now follow demo setup instructions below
