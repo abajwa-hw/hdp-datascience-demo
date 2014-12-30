@@ -16,9 +16,9 @@ set -e
 #install mvn as root
 mkdir /usr/share/maven
 cd /usr/share/maven
-wget http://www.carfab.com/apachesoftware/maven/maven-3/3.2.2/binaries/apache-maven-3.2.2-bin.tar.gz
-tar xvzf apache-maven-3.2.2-bin.tar.gz
-ln -s /usr/share/maven/apache-maven-3.2.2/ /usr/share/maven/latest
+wget http://mirrors.koehn.com/apache/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz
+tar xvzf apache-maven-3.2.5-bin.tar.gz
+ln -s /usr/share/maven/apache-maven-3.2.5/ /usr/share/maven/latest
 
 yum update -y --skip-broken
 yum install gcc gcc-c++ gcc-gfortran -y

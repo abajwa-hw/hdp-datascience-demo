@@ -1,5 +1,6 @@
 ## Machine learning workshop demo
 This demo is part of a 'Machine Learning with Hadoop' webinar.
+
 The webinar recording and slides are available at http://hortonworks.com/partners/learn
 
 #### Predicting Flight Delays 
