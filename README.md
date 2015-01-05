@@ -1,6 +1,5 @@
 ## Machine learning workshop demo
 This demo is part of a 'Machine Learning with Hadoop' webinar.
-
 The webinar recording and slides are available at http://hortonworks.com/partners/learn
 
 #### Predicting Flight Delays 
@@ -87,9 +86,11 @@ git clone https://github.com/abajwa-hw/hdp-datascience-demo.git
 #execute yum install steps that require root. Also bring down unnecessary services to save VM memory
 sudo /home/demo/hdp-datascience-demo/step1_runasroot.sh
 
-#install python etc and setup demo
+#install/setup iPython notebook, pydoop, pyspark
 /home/demo/hdp-datascience-demo/step2_runasdemo.sh
 
+#download data needed for airline demo
+/home/demo/hdp-datascience-demo/step3_setupairlinedemo.sh
 ```
 
 ##### Launch demo
