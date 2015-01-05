@@ -1,3 +1,6 @@
+export HOME_DIR=/home/demo
+export PROJECT_DIR=$HOME_DIR/hdp-datascience-demo
+
 #create HDFS dirs
 sudo -u hdfs hadoop fs -mkdir /user/demo
 sudo -u hdfs hadoop fs -chown demo:demo /user/demo
