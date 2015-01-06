@@ -99,9 +99,8 @@ source ./pyenv/bin/activate
 
 # Install ipython
 easy_install ipython
-easy_install -U distribute
-
-pip install matplotlib
+sudo easy_install -U distribute
+sudo pip install matplotlib
 
 #Install PYDOOP – package to enable Hadoop access from Python.
 echo "Installing pydoop..."
