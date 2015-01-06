@@ -79,7 +79,7 @@ echo "source $HOME_DIR/pyenv/bin/activate" >> $HOME_DIR/.bashrc
 
 #Install data-science related Python package - this can take 10min
 echo "Installing python packages: numpy scipy pandas scikit-learn..."
-pip install numpy scipy pandas scikit-learn
+pip install numpy scipy pandas scikit-learn rpy2
 
 #Install matplotlib (for graphics in Python)
 cd $HOME_DIR
