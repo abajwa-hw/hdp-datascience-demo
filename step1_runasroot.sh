@@ -31,4 +31,5 @@ yum install lapack lapack-devel blas blas-devel -y
 yum install java-1.7.0-openjdk-devel -y
 wget -P /etc/yum.repos.d/ http://petersen.fedorapeople.org/pandoc-standalone/pandoc-standalone.repo
 yum install pandoc pandoc-citeproc -y
+yum install readline-devel -y
 
