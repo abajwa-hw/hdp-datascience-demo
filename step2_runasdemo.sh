@@ -155,10 +155,22 @@ echo "c.NotebookApp.open_browser = False" >> $HOME_DIR/.ipython/profile_spark/ip
 
 echo "Downloading Spark..."
 cd
-wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.1.0/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
-tar xvfz spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
-export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695
-echo "export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695" >> ~/.bashrc
+if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+then
+	wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.2.0/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041.tgz
+	tar xvfz spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041.tgz
+	export SPARK_HOME=$HOME_DIR/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041
+	echo "export SPARK_HOME=$HOME_DIR/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041" >> ~/.bashrc
+	
+	echo "spark.driver.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf 
+	echo "spark.yarn.am.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf
+
+else
+	wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.1.0/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
+	tar xvfz spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
+	export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695
+	echo "export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695" >> ~/.bashrc
+fi
 
 #configure ~/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "import os" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
