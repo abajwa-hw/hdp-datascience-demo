@@ -157,6 +157,8 @@ echo "Downloading Spark..."
 cd
 if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
 then
+
+	#follow instructions from 2.2 Spark TP
 	wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.2.0/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041.tgz
 	tar xvfz spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041.tgz
 	export SPARK_HOME=$HOME_DIR/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041
@@ -164,6 +166,9 @@ then
 	
 	echo "spark.driver.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf 
 	echo "spark.yarn.am.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf
+	
+	git clone https://github.com/hortonworks/spark.git
+	git clone https://github.com/hortonworks/spark-native-yarn.git
 
 else
 	wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.1.0/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
