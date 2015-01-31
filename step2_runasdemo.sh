@@ -19,7 +19,7 @@ then
 	export HADOOP_HOME=/usr/hdp/2.2.0.0-2041/hadoop
 	export HADOOP_VERSION=2.6.0.2.2.0.0-2041
 	export HDP_VERSION=2.2
-	export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.71.x86_64
+	export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk.x86_64
 else
 	export HADOOP_HOME=/usr/lib/hadoop
 	export JDK_VER=`ls /usr/jdk64/`
