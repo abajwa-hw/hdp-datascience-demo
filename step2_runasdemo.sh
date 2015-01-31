@@ -126,7 +126,7 @@ python setup.py install --skip-build
 
 
 #Setup default IPython notebook profile
-pip install tornado pyzmq ipython pygments matplotlib jinja2
+pip install tornado pyzmq ipython pygments matplotlib jinja2 jsonschema
 ipython profile create default
 
 echo "c.IPKernelApp.pylab = 'inline'" >> $HOME_DIR/.ipython/profile_default/ipython_notebook_config.py
