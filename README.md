@@ -117,7 +117,7 @@ ipython notebook --profile spark
 
 ##### iPython Notebook embedded in Ambari View
 
-- You can embed the notebook within an Ambari using the (Iframe view)[https://github.com/abajwa-hw/iframe-view]
+- You can embed the notebook within an Ambari using the [Iframe view](https://github.com/abajwa-hw/iframe-view)
 
 - To allow iPython to be embedded you need to add the below config to the end of your profile before starting the notebook
 ```
