@@ -1,17 +1,17 @@
 set -e
 
 #HOME_DIR=$1
-HOME_DIR=/home/demo
-PROJECT_DIR=$HOME_DIR/hdp-datascience-demo
+export HOME_DIR=/home/demo
+export PROJECT_DIR=$HOME_DIR/hdp-datascience-demo
 
+export M2_HOME=/usr/share/maven/latest
+export M2=$M2_HOME/bin
+export PATH=$PATH:$M2
 
 echo 'M2_HOME=/usr/share/maven/latest' >> ~/.bashrc
 echo 'M2=$M2_HOME/bin' >> ~/.bashrc
 echo 'PATH=$PATH:$M2' >> ~/.bashrc
 
-export M2_HOME=/usr/share/maven/latest
-export M2=$M2_HOME/bin
-export PATH=$PATH:$M2
 
 #2.2 specific vars that need to be set
 if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
@@ -20,6 +20,16 @@ then
 	export HADOOP_VERSION=2.6.0.2.2.0.0-2041
 	export HDP_VERSION=2.2
 	export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk.x86_64
+	
+	#export HADOOP_HOME=/usr/hdp/current/hadoop-client
+	#export PYTHONPATH=/usr/lib/python2.6/site-packages
+	#export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk.x86_64
+	#export YARN_CONF_DIR=/etc/hadoop/conf
+	#export HADOOP_CONF_DIR=/etc/hadoop/conf
+	#source /home/demo/pyenv/bin/activate
+	#export SPARK_HOME=/home/demo/spark-1.2
+	#export HIVE_HOME=/usr/hdp/current/hive-client
+	
 else
 	export HADOOP_HOME=/usr/lib/hadoop
 	export JDK_VER=`ls /usr/jdk64/`
@@ -98,7 +108,7 @@ cd $HOME_DIR
 source ./pyenv/bin/activate
 
 # Install ipython
-easy_install ipython
+easy_install ipython==2.3.0
 sudo easy_install -U distribute
 sudo pip install matplotlib
 
@@ -135,6 +145,38 @@ echo "c.NotebookApp.open_browser = False" >> $HOME_DIR/.ipython/profile_default/
 echo "c.NotebookApp.port = 9999" >> $HOME_DIR/.ipython/profile_default/ipython_notebook_config.py
 
 
+echo "Downloading Spark..."
+cd
+if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+then
+
+	#follow instructions from 2.2 Spark TP
+	#wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.2.0/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041.tgz
+	#tar xvfz spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041.tgz
+	#export SPARK_HOME=$HOME_DIR/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041
+	#echo "export SPARK_HOME=$HOME_DIR/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041" >> ~/.bashrc
+	#git clone https://github.com/hortonworks/spark.git
+	#git clone https://github.com/hortonworks/spark-native-yarn.git
+	
+	#download pre-built Spark 1.2 patched with SPARK-4923
+	wget https://dl.dropboxusercontent.com/u/114020/spark-1.2.zip
+	unzip spark-1.2.zip
+	export SPARK_HOME=$HOME_DIR/spark-1.2
+	echo "export SPARK_HOME=$HOME_DIR/spark-1.2" >> ~/.bashrc
+		
+	echo "spark.driver.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf 
+	echo "spark.yarn.am.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf
+	
+
+
+
+else
+	wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.1.0/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
+	tar xvfz spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
+	export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695
+	echo "export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695" >> ~/.bashrc
+fi
+
 echo "Installing ISpark..."
 cd $HOME_DIR
 git clone https://github.com/tribbloid/ISpark
@@ -153,37 +195,14 @@ echo "c.NotebookApp.ip = '*' " >> $HOME_DIR/.ipython/profile_spark/ipython_confi
 echo "c.NotebookApp.open_browser = False" >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
 
 
-echo "Downloading Spark..."
-cd
-if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
-then
-
-	#follow instructions from 2.2 Spark TP
-	wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.2.0/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041.tgz
-	tar xvfz spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041.tgz
-	export SPARK_HOME=$HOME_DIR/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041
-	echo "export SPARK_HOME=$HOME_DIR/spark-1.2.0.2.2.0.0-82-bin-2.6.0.2.2.0.0-2041" >> ~/.bashrc
-	
-	echo "spark.driver.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf 
-	echo "spark.yarn.am.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf
-	
-	git clone https://github.com/hortonworks/spark.git
-	git clone https://github.com/hortonworks/spark-native-yarn.git
-
-else
-	wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.1.0/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
-	tar xvfz spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
-	export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695
-	echo "export SPARK_HOME=$HOME_DIR/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695" >> ~/.bashrc
-fi
 
 #configure ~/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "import os" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "import sys" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "spark_home = os.environ.get(‘SPARK_HOME’, None) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "sys.path.insert(0, os.path.join(spark_home, ‘python’)) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "sys.path.insert(0, os.path.join(spark_home, ‘python/lib/py4j-0.8.1-src.zip’)) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "execfile(os.path.join(spark_home, ‘python/pyspark/shell.py’))" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
+echo "spark_home = os.environ.get('SPARK_HOME', None) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
+echo "sys.path.insert(0, os.path.join(spark_home, 'python')) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
+echo "sys.path.insert(0, os.path.join(spark_home, 'python/lib/py4j-0.8.1-src.zip')) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
+echo "execfile(os.path.join(spark_home, 'python/pyspark/shell.py'))" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 
 cd $HOME_DIR
 rm -f *.tgz *.gz *.zip *.tar
