@@ -1,15 +1,27 @@
 
-echo "Stopping Oozie..."
-su -l oozie -c "cd /var/log/oozie; /usr/lib/oozie/bin/oozied.sh stop"
+if [ -e /usr/hdp/current/hadoop/bin/hdfs ]
+then
+	echo "Stopping Oozie..."
+	su -l oozie -c "cd /var/log/oozie; /usr/hdp/2.2.0.0-2041/oozie/bin/oozied.sh stop"
 
-echo "Stopping WebHCat..."
-su -l hcat -c "/usr/lib/hive-hcatalog/sbin/webhcat_server.sh stop"
+	echo "Stopping WebHCat..."
+	su -l hcat -c "/usr/hdp/2.2.0.0-2041/hive-hcatalog/sbin/webhcat_server.sh stop"
 
-echo "Stopping Tez..."
-su -l tez -c "/usr/lib/tez/sbin/tez-daemon.sh stop ampoolservice"
+	echo "Stopping Hive..."
+	ps aux | awk '{print $1,$2}' | grep hive | awk '{print $2}' | xargs kill >/dev/null 2>&1
+else
+	echo "Stopping Oozie..."
+	su -l oozie -c "cd /var/log/oozie; /usr/hdp/current/oozie/bin/oozied.sh stop"
 
-echo "Stopping Hive..."
-ps aux | awk '{print $1,$2}' | grep hive | awk '{print $2}' | xargs kill >/dev/null 2>&1
+	echo "Stopping WebHCat..."
+	su -l hcat -c "/usr/lib/hive-hcatalog/sbin/webhcat_server.sh stop"
+
+	echo "Stopping Tez..."
+	su -l tez -c "/usr/lib/tez/sbin/tez-daemon.sh stop ampoolservice"
+
+	echo "Stopping Hive..."
+	ps aux | awk '{print $1,$2}' | grep hive | awk '{print $2}' | xargs kill >/dev/null 2>&1
+fi
 
 set -e
 
