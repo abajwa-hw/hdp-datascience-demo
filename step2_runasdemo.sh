@@ -190,7 +190,7 @@ git clone https://github.com/tribbloid/ISpark
 cd ISpark/
 #Change spark version in ISpark/pom.xml from 1.1.1 to 1.2.1
 cp pom.xml pom.xml.bak
-sed -i "s/1.1.1/1.2.1p/g" pom.xml
+sed -i "s/1.1.1/1.2.1/g" pom.xml
 
 mvn package
 source ../pyenv/bin/activate
