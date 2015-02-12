@@ -58,6 +58,11 @@ vi "/Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwa
 ssh root@sandbox.hortonworks.com
 /root/start_ambari.sh
 ```
+- Update /etc/hosts to ensure the localhost entry points to the actual IP address (not 127.0.0.1)
+```
+vi /etc/hosts
+service network restart
+```
 
 - Make any config changes required via Ambari e.g. the below YARN config changes via Ambari and restart YARN (also the pig changes described above to enable Tez if you are on 2.2)
 ```
@@ -93,7 +98,26 @@ sudo /home/demo/hdp-datascience-demo/step1_runasroot.sh
 /home/demo/hdp-datascience-demo/step3_setupairlinedemo.sh
 ```
 
-##### Launch demo
+##### Launch demo on HDP 2.2
+
+To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb (on HDP 2.1) or airline_python-2.2.ipynb (on HDP 2.2)
+e.g. http://sandbox.hortonworks.com:9999
+```
+
+source ~/.bashrc
+cd /home/demo/hdp-datascience-demo/demo-HDP2.2
+ipython notebook
+```
+
+To run the Scala/Spark demo execute below then point your browser to port where ipython notebook starts on and open airline_spark.ipynb
+e.g. http://sandbox.hortonworks.com:9999
+```
+source ~/.bashrc
+cd /home/demo/hdp-datascience-demo/demo-HDP2.2
+ipython notebook --profile spark
+```
+
+##### Launch demo on HDP 2.2
 
 To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb (on HDP 2.1) or airline_python-2.2.ipynb (on HDP 2.2)
 e.g. http://sandbox.hortonworks.com:9999
