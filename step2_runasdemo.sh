@@ -106,8 +106,8 @@ source ./pyenv/bin/activate
 
 # Install ipython
 easy_install ipython==2.3.0
-sudo easy_install -U distribute
-sudo pip install matplotlib
+easy_install -U distribute
+pip install matplotlib
 
 #Install PYDOOP – package to enable Hadoop access from Python.
 echo "Installing pydoop..."
@@ -117,8 +117,8 @@ then
 	git clone https://github.com/crs4/pydoop.git
 	cd pydoop
 	#update _hadoop2_jars method in ./pydoop/hadoop_utils.py
-	mv pydoop/hadoop_utils.py pydoop/hadoop_utils.py.bak
-	cp -f $PROJECT_DIR/setup/hadoop_utils_22.py ./pydoop/hadoop_utils.py
+	mv $HOME_DIR/pydoop/pydoop/hadoop_utils.py $HOME_DIR/pydoop/pydoop/hadoop_utils.py.bak
+	cp -f $PROJECT_DIR/setup/hadoop_utils_22.py $HOME_DIR/pydoop/pydoop/hadoop_utils.py
 else
 
 	wget http://sourceforge.net/projects/pydoop/files/Pydoop-0.12/pydoop-0.12.0.tar.gz 
@@ -188,6 +188,10 @@ echo "Installing ISpark..."
 cd $HOME_DIR
 git clone https://github.com/tribbloid/ISpark
 cd ISpark/
+#Change spark version in ISpark/pom.xml from 1.1.1 to 1.2.1
+cp pom.xml pom.xml.bak
+sed -i "s/1.1.1/1.2.1p/g" pom.xml
+
 mvn package
 source ../pyenv/bin/activate
 ipython profile create spark
@@ -204,7 +208,7 @@ echo "c.NotebookApp.open_browser = False" >> $HOME_DIR/.ipython/profile_spark/ip
 
 
 #configure ~/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "import os" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
+echo "import os" > $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "import sys" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "spark_home = os.environ.get('SPARK_HOME', None) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "sys.path.insert(0, os.path.join(spark_home, 'python')) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
