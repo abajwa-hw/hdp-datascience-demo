@@ -1,5 +1,5 @@
 
-if [ -e /usr/hdp/current/hadoop/bin/hdfs ]
+if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
 then
 	echo "Stopping Oozie..."
 	su -l oozie -c "cd /var/log/oozie; /usr/hdp/2.2.0.0-2041/oozie/bin/oozied.sh stop"
