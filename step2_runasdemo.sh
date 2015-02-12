@@ -83,9 +83,6 @@ chmod +x ./pyenv/bin/activate
 source ./pyenv/bin/activate
 echo "source $HOME_DIR/pyenv/bin/activate" >> $HOME_DIR/.bashrc
 
-#if [ "$HDP_VERSION" == "2.2" ]
-#then
-
 
 #Install data-science related Python package - this can take 10min
 echo "Installing python packages: numpy scipy pandas scikit-learn..."
@@ -114,20 +111,30 @@ sudo pip install matplotlib
 
 #Install PYDOOP – package to enable Hadoop access from Python.
 echo "Installing pydoop..."
-wget http://sourceforge.net/projects/pydoop/files/Pydoop-0.12/pydoop-0.12.0.tar.gz 
-tar xzvf pydoop-0.12.0.tar.gz 
-cd pydoop-0.12.0
 
-#https://github.com/ZEMUSHKA/pydoop/commit/414a2e52390a873e4766633891190ffede937d90
-#vi pydoop/hadoop_utils.py 
-mv $HOME_DIR/pydoop-0.12.0/pydoop/hadoop_utils.py $HOME_DIR/pydoop-0.12.0/pydoop/hadoop_utils.py.bak
-cp -f $PROJECT_DIR/setup/hadoop_utils.py $HOME_DIR/pydoop-0.12.0/pydoop
+if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+then
+	git clone https://github.com/crs4/pydoop.git
+	cd pydoop
+	#update _hadoop2_jars method in ./pydoop/hadoop_utils.py
+	mv pydoop/hadoop_utils.py pydoop/hadoop_utils.py.bak
+	cp -f $PROJECT_DIR/setup/hadoop_utils_22.py ./pydoop/hadoop_utils.py
+else
 
-#https://github.com/ZEMUSHKA/pydoop/commit/e3d3378ae9921561f6c600c79364c2ad42ec206d
-#vi setup.py
-mv $HOME_DIR/pydoop-0.12.0/setup.py $HOME_DIR/pydoop-0.12.0/setup.py.bak
-cp -f $PROJECT_DIR/setup/setup.py $HOME_DIR/pydoop-0.12.0
+	wget http://sourceforge.net/projects/pydoop/files/Pydoop-0.12/pydoop-0.12.0.tar.gz 
+	tar xzvf pydoop-0.12.0.tar.gz 
+	cd pydoop-0.12.0
 
+	#https://github.com/ZEMUSHKA/pydoop/commit/414a2e52390a873e4766633891190ffede937d90
+	#vi pydoop/hadoop_utils.py 
+	mv $HOME_DIR/pydoop-0.12.0/pydoop/hadoop_utils.py $HOME_DIR/pydoop-0.12.0/pydoop/hadoop_utils.py.bak
+	cp -f $PROJECT_DIR/setup/hadoop_utils.py $HOME_DIR/pydoop-0.12.0/pydoop
+
+	#https://github.com/ZEMUSHKA/pydoop/commit/e3d3378ae9921561f6c600c79364c2ad42ec206d
+	#vi setup.py
+	mv $HOME_DIR/pydoop-0.12.0/setup.py $HOME_DIR/pydoop-0.12.0/setup.py.bak
+	cp -f $PROJECT_DIR/setup/setup.py $HOME_DIR/pydoop-0.12.0
+fi
 
  
 # build PyDoop 
