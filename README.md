@@ -129,7 +129,7 @@ ipython notebook
 ```
 
 To run the Scala/Spark demo execute below then point your browser to port where ipython notebook starts on and open airline_spark.ipynb
-e.g. http://sandbox.hortonworks.com:9999
+e.g. http://sandbox.hortonworks.com:9998
 ```
 source ~/.bashrc
 cd /home/demo/hdp-datascience-demo/demo

@@ -206,6 +206,7 @@ echo "MASTER = 'yarn-client'" >> $HOME_DIR/.ipython/profile_spark/ipython_config
 echo 'c.KernelManager.kernel_cmd = [SPARK_HOME+"/bin/spark-submit",   "--master", MASTER,  "--class", "org.tribbloid.ispark.Main",   "--executor-memory", "2G", "/home/demo/ISpark/core/target/ispark-core-assembly-0.1.0-SNAPSHOT.jar",   "--profile", "{connection_file}",  "--interp", "Spark",  "--parent"]' >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
 echo "c.NotebookApp.ip = '*' " >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
 echo "c.NotebookApp.open_browser = False" >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
+echo "c.NotebookApp.port = 9998" >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
 echo "c.NotebookApp.tornado_settings = {'headers': {'Content-Security-Policy': '' } }" >>  $HOME_DIR/.ipython/profile_spark/ipython_config.py
 echo "c.NotebookApp.webapp_settings = {'headers': {'X-Frame-Options': 'ALLOW-FROM all'}}" >>  $HOME_DIR/.ipython/profile_spark/ipython_config.py
 
