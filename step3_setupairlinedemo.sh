@@ -37,16 +37,29 @@ rm $PROJECT_DIR/demo/airline/weather/*.csv
 
 cd $PROJECT_DIR/demo
 
+echo ""
+echo ""
 echo "The demo setup is complete"
 echo "To run the python demo execute"
 echo "source ~/.bashrc"
-echo "cd /home/demo/hdp-datascience-demo/demo"
+
+if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+then
+	echo "cd /home/demo/hdp-datascience-demo/demo-HDP2.2"
+else
+	echo "cd /home/demo/hdp-datascience-demo/demo"
+fi		
 echo "ipython notebook"
 echo "Then navigate to http://sandbox.hortonworks.com:<port>"
 echo ""
 echo "To run the Scala/Spark demo execute"
 echo "source ~/.bashrc"
-echo "cd /home/demo/hdp-datascience-demo/demo"
+if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+then
+	echo "cd /home/demo/hdp-datascience-demo/demo-HDP2.2"
+else
+	echo "cd /home/demo/hdp-datascience-demo/demo"
+fi	
 echo "ipython notebook --profile spark"
 echo "Then navigate to http://sandbox.hortonworks.com:<port>"
 
