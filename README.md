@@ -73,18 +73,23 @@ yarn.scheduler.maximum-allocation-mb = 9216
 
 - Create demo user
 ```
+
 #add demo user and create home dir
 useradd -m -d /home/demo -G users demo 
 echo "demo:demo" | chpasswd
 cp /etc/sudoers /etc/sudoers.bak
 echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+```
 
-#setup automated ssh for demo user
+- Setup automated ssh for demo user
+```
+su demo
 ssh-keygen
-#hit enter twice
+#hit enter three times
 ssh-copy-id demo@sandbox.hortonworks.com
-chmod 644 .ssh/authorized_keys
-chmod 755 .ssh
+#enter demo
+chmod 644 ~/.ssh/authorized_keys
+chmod 755 ~/.ssh
 #test it works
 ssh demo@sandbox.hortonworks.com
 exit
