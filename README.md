@@ -86,12 +86,12 @@ echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 su demo
 ssh-keygen
 #hit enter three times
-ssh-copy-id demo@sandbox.hortonworks.com
+ssh-copy-id demo@sandbox
 #enter demo
 chmod 644 ~/.ssh/authorized_keys
 chmod 755 ~/.ssh
 #test it works
-ssh demo@sandbox.hortonworks.com
+ssh demo@sandbox
 exit
 
 ```
