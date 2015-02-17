@@ -79,6 +79,16 @@ echo "demo:demo" | chpasswd
 cp /etc/sudoers /etc/sudoers.bak
 echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
+
+#setup automated ssh for demo user
+ssh-keygen
+ssh-copy-id demo@sandbox.hortonworks.com
+chmod 644 .ssh/authorized_keys
+chmod 755 .ssh
+#test it works
+ssh demo@sandbox.hortonworks.com
+exit
+
 ```
 
 As demo user, install needed software and setup the demo. This may run for 30+min

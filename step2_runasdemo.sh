@@ -47,6 +47,7 @@ echo "export PYTHONPATH=$PYTHONPATH" >> $HOME_DIR/.bashrc
 echo "export JAVA_HOME=$JAVA_HOME"  >> $HOME_DIR/.bashrc 
 echo "export YARN_CONF_DIR=/etc/hadoop/conf" >> ~/.bashrc
 echo "export HADOOP_CONF_DIR=/etc/hadoop/conf" >> ~/.bashrc
+echo "cd $HOME_DIR" >> $HOME_DIR/.bashrc
 
 
 #install sqllite
@@ -220,8 +221,32 @@ echo "sys.path.insert(0, os.path.join(spark_home, 'python')) " >> $HOME_DIR/.ipy
 echo "sys.path.insert(0, os.path.join(spark_home, 'python/lib/py4j-0.8.1-src.zip')) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 echo "execfile(os.path.join(spark_home, 'python/pyspark/shell.py'))" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
 
+
+
+#Install scalding for R demo
+git clone scalding
+git clone https://github.com/twitter/scalding.git
+cd scalding/
+git checkout master
+sed -i "s/my.host.here/sandbox/g" /home/demo/scalding/scripts/scald.rb
+
+#replace /home/demo/scalding/project/Build.scala
+mv /home/demo/scalding/project/Build.scala /home/demo/scalding/project/Build.scala.orig
+cp $PROJECT_DIR/setup/Build.scala /home/demo/scalding/project
+./sbt update
+./sbt assembly
+
+export HADOOP_CMD=/usr/bin/hadoop 
+export HADOOP_STREAMING=/usr/lib/hadoop/contrib/streaming/hadoop-streaming.jar
+
+echo "export HADOOP_CMD=/usr/bin/hadoop" >> ~/.bashrc
+echo "export HADOOP_STREAMING=/usr/lib/hadoop/contrib/streaming/hadoop-streaming.jar" >> ~/.bashrc
+
+R CMD javareconf -e
+
+
 cd $HOME_DIR
 rm -f *.tgz *.gz *.zip *.tar
 
-echo 'iPython notebook, pydoop, pyspark setup complete'
+echo 'iPython notebook, pydoop, ISpark, R/Scalding setup complete'
 
