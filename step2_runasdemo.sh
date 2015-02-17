@@ -233,7 +233,9 @@ sed -i "s/my.host.here/sandbox/g" /home/demo/scalding/scripts/scald.rb
 mv /home/demo/scalding/project/Build.scala /home/demo/scalding/project/Build.scala.orig
 cp $PROJECT_DIR/setup/Build.scala /home/demo/scalding/project
 ./sbt update
+set +e
 ./sbt assembly
+set -e
 
 export HADOOP_CMD=/usr/bin/hadoop 
 export HADOOP_STREAMING=/usr/lib/hadoop/contrib/streaming/hadoop-streaming.jar
