@@ -59,4 +59,6 @@ wget https://github.com/RevolutionAnalytics/rhdfs/blob/master/build/rhdfs_1.0.8.
 mv rhdfs_1.0.8.tar.gz?raw=true rhdfs_1.0.8.tar.gz
 R CMD INSTALL rmr2_3.3.0.tar
 R CMD INSTALL rhdfs_1.0.8.tar.gz 
-R CMD javareconf -e
+#R CMD javareconf -e
+
+echo "Finished executing part 1"
