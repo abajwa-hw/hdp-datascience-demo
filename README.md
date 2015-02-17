@@ -21,13 +21,13 @@ You can simply import it into VMware Fusion, start the VM and follow the instruc
 
 A version of the demo VM running on HDP 2.2 sandbox is currently being worked on 
 
-##### Setup VM - Option 2: Setup demo on HDP 2.1 sandbox VM
+##### Setup VM - Option 2: Setup demo on HDP 2.1 sandbox VM 
 
 - Download HDP 2.1 sandbox VM image (Hortonworks_Sandbox_2.1.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Hortonworks_Sandbox_2.1.ova into VMWare
 - Now follow demo setup instructions below
 
-##### Setup VM - Option 3: Setup demo on HDP 2.2 sandbox VM - only python demo supported for now on 2.2
+##### Setup VM - Option 3: Setup demo on HDP 2.2 sandbox VM - Python, Spark and R/Scalding demos all working
 
 - Download HDP 2.2 sandbox VM image (Sandbox_HDP_2.2_VMware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Sandbox_HDP_2.2_VMware.ova into VMWare
