@@ -47,7 +47,7 @@ yum install pandoc pandoc-citeproc -y
 #set up R
 yum install R readline-devel python-devel -y
 export HADOOP_CMD=/usr/bin/hadoop 
-export HADOOP_STREAMING=/usr/lib/hadoop/contrib/streaming/hadoop-streaming.jar
+#export HADOOP_STREAMING=/usr/lib/hadoop/contrib/streaming/hadoop-streaming.jar
 echo ". /usr/hdp/2.2.0.0-2041/hadoop/libexec/hadoop-config.sh --config /etc/hadoop/conf" >> /etc/profile.d/r.sh
 
 Rscript -e 'install.packages(c("Rcpp", "RJSONIO", "bitops", "digest", "functional", "reshape2", "stringr", "plyr", "caTools", "rJava", "Hmisc", "plyr", "dplyr", "devtools", "Rook", "R.methodsS3"), repos="http://cran.us.r-project.org");' 

@@ -81,7 +81,7 @@ cp /etc/sudoers /etc/sudoers.bak
 echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 ```
 
-- Setup automated ssh for demo user
+- Setup automated ssh for demo user (needed for the R/Scalding demo)
 ```
 su demo
 ssh-keygen
