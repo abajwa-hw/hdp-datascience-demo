@@ -224,6 +224,7 @@ echo "execfile(os.path.join(spark_home, 'python/pyspark/shell.py'))" >> $HOME_DI
 
 
 #Install scalding for R demo
+cd
 git clone https://github.com/twitter/scalding.git
 cd scalding/
 git checkout master
