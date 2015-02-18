@@ -58,11 +58,6 @@ vi "/Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwa
 ssh root@sandbox.hortonworks.com
 /root/start_ambari.sh
 ```
-- Update /etc/hosts to ensure the localhost entry points to the actual IP address (not 127.0.0.1)
-```
-vi /etc/hosts
-service network restart
-```
 
 - Make any config changes required via Ambari e.g. the below YARN config changes via Ambari and restart YARN (also the pig changes described above to enable Tez if you are on 2.2)
 ```
