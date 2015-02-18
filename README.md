@@ -21,7 +21,7 @@ You can simply import it into VMware Fusion, start the VM and follow the instruc
 
 A version of the demo VM running on HDP 2.2 sandbox is currently being worked on 
 
-##### Setup VM - Option 2: Setup demo on HDP 2.1 sandbox VM 
+##### Setup VM - Option 2: Setup demo on HDP 2.1 sandbox VM
 
 - Download HDP 2.1 sandbox VM image (Hortonworks_Sandbox_2.1.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Hortonworks_Sandbox_2.1.ova into VMWare
@@ -115,7 +115,7 @@ sudo /home/demo/hdp-datascience-demo/step1_runasroot.sh
 
 ##### Launch demo on HDP 2.2
 
-To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb 
+- To run the python demo execute below as demo user, then point your browser to port where ipython notebook starts on and open airline_python.ipynb 
 e.g. http://sandbox.hortonworks.com:9999
 ```
 
@@ -124,7 +124,7 @@ cd /home/demo/hdp-datascience-demo/demo-HDP2.2
 ipython notebook
 ```
 
-To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_Scalding_R.ipynb
+- To run the python demo execute below as demo user, then point your browser to port where ipython notebook starts on and open airline_Scalding_R.ipynb
 e.g. http://sandbox.hortonworks.com:9999
 ```
 source ~/.bashrc
@@ -134,7 +134,7 @@ ipython notebook
 ```
 
 
-To run the Scala/Spark demo execute below then point your browser to port where ipython notebook starts on and open airline_spark.ipynb
+- To run the Scala/Spark demo execute below as demo user, then point your browser to port where ipython notebook starts on and open airline_spark.ipynb
 e.g. http://sandbox.hortonworks.com:9998
 ```
 source ~/.bashrc
