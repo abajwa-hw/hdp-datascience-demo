@@ -44,6 +44,18 @@ yum install java-1.7.0-openjdk-devel -y
 wget -P /etc/yum.repos.d/ http://petersen.fedorapeople.org/pandoc-standalone/pandoc-standalone.repo
 yum install pandoc pandoc-citeproc -y
 
+OS=$(lsb_release -si)
+if [[ $OS == "RedHatEnterpriseServer" ]]
+then
+	echo "RedHat detected..manually installing R dependencies"
+	wget http://mirror.centos.org/centos/6/os/x86_64/Packages/lapack-devel-3.2.1-4.el6.x86_64.rpm
+	wget http://mirror.centos.org/centos/6/os/x86_64/Packages/blas-devel-3.2.1-4.el6.x86_64.rpm
+	wget http://mirror.centos.org/centos/6/os/x86_64/Packages/texinfo-tex-4.13a-8.el6.x86_64.rpm
+	wget http://mirror.centos.org/centos/6/os/x86_64/Packages/libicu-devel-4.2.1-9.1.el6_2.x86_64.rpm
+	sudo yum localinstall -y *.rpm
+	/bin/rm -f *.rpm
+fi
+ 
 #set up R
 yum install R readline-devel python-devel -y
 export HADOOP_CMD=/usr/bin/hadoop 
