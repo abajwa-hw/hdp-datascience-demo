@@ -45,7 +45,7 @@ wget -P /etc/yum.repos.d/ http://petersen.fedorapeople.org/pandoc-standalone/pan
 yum install pandoc pandoc-citeproc -y
 
 #set up R
-yum install R readline-devel python-devel -y --skip-broken
+yum install R readline-devel python-devel -y
 export HADOOP_CMD=/usr/bin/hadoop 
 #export HADOOP_STREAMING=/usr/lib/hadoop/contrib/streaming/hadoop-streaming.jar
 echo ". /usr/hdp/2.2.0.0-2041/hadoop/libexec/hadoop-config.sh --config /etc/hadoop/conf" >> /etc/profile.d/r.sh
