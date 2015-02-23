@@ -6,16 +6,17 @@ The webinar recording and slides are available at http://hortonworks.com/partner
 Demo scenario:
 Every year approximately 20% of airline flights are delayed or cancelled, resulting in significant costs to both travelers and airlines. 
 As our example use-case, we will build a supervised learning model that predicts airline delay from historical flight data and weather information.
-Currently there are two versions of this demo available: one with Python/Scikit-learn and one with Spark/Scala (the R demo is being developed)
+Currently there are 3 versions of this demo available: one with Python/Scikit-learn, one with Spark/Scala and one with R/Scalding 
 More details can be found on the below Hortonworks blog posts:
 - http://hortonworks.com/blog/data-science-apacheh-hadoop-predicting-airline-delays/
 - http://hortonworks.com/blog/data-science-hadoop-spark-scala-part-2/
+- http://hortonworks.com/blog/data-science-hadoop-predicting-airline-delays-part-3/
 
 To get a better understanding of machine learning and how the models below work:
 - https://www.coursera.org/course/ml
 
 ##### Setup VM - Option 1: Import prebuilt VM
-There is a prebuilt VM with the demo running on a HDP 2.1 sandbox [here](https://dl.dropboxusercontent.com/u/114020/Hortonworks_Sandbox_2.1_MLdemo.ova) 
+There is a prebuilt VM with the demo running on a HDP 2.1 sandbox [here](https://dl.dropboxusercontent.com/u/114020/Hortonworks_Sandbox_2.1_MLdemo.ova) - (R/scalding not available on this one yet)
 
 You can simply import it into VMware Fusion, start the VM and follow the instructions in the readme under /root. You do not need to follow the rest of the instructions below.
 
