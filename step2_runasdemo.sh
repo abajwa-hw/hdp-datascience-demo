@@ -249,7 +249,7 @@ export HADOOP_CMD=/usr/bin/hadoop
 echo "export HADOOP_CMD=/usr/bin/hadoop" >> ~/.bashrc
 #echo "export HADOOP_STREAMING=/usr/lib/hadoop/contrib/streaming/hadoop-streaming.jar" >> ~/.bashrc
 
-R CMD javareconf -e
+#R CMD javareconf -e
 
 
 cd $HOME_DIR
