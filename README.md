@@ -80,8 +80,7 @@ echo "demo    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 - Setup automated ssh for demo user (needed for the R/Scalding demo)
 ```
 su demo
-ssh-keygen
-#hit enter three times
+ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
 ssh-copy-id demo@sandbox
 #enter demo
 chmod 644 ~/.ssh/authorized_keys
