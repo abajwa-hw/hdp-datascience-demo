@@ -19,7 +19,7 @@ Previous version of these instructions that works with older versions of HDP are
 
 ##### Setup options
 - [Prebuilt sandbox VM](https://github.com/abajwa-hw/hdp-datascience-demo#setup-vm---option-1-import-prebuilt-vm)
-- [Automated scripts to setup demo](https://github.com/abajwa-hw/hdp-datascience-demo#launch-demo-on-hdp-22)
+- [Automated scripts to setup demo](https://github.com/abajwa-hw/hdp-datascience-demo#setup-vm---option-2-setup-demo-on-hdp-22-sandbox-vm---python-spark-and-rscalding-demos-all-working)
 
 -------------------------
 
@@ -62,19 +62,8 @@ su demo
 
 - Download HDP 2.2 sandbox VM image (Sandbox_HDP_2.2_VMware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Sandbox_HDP_2.2_VMware.ova into VMWare
-- Now follow demo setup instructions below
-- After bringing up Ambari, also make the below Pig config changes to enable Tez and restart Pig. Also shutdown any non-critical components to conserve memory
-```
-#exectype=mapreduce
-exectype=tez
-```
-![Image](../master/screenshots/pig-tez.png?raw=true)
-
-
-##### Demo setup instructions
-
 - Before starting the VM, in the "Hard Disk" VM settings set disk size to 65GB
-- Before starting the VM, open the .vmx file and set numvcpus = "4" and memsize = "16000"
+- Also before starting the VM, open the .vmx file and set numvcpus = "4" and memsize = "16000"
 ```
 #e.g. if you are using VMWare Fusion on OSX 
 vi "/Users/<your userid>/Documents/Virtual Machines.localized/<your VMname>.vmwarevm/<your VMname>.vmx"
@@ -90,12 +79,20 @@ ssh root@sandbox.hortonworks.com
 /root/start_ambari.sh
 ```
 
-- Make any config changes required via Ambari e.g. the below YARN config changes via Ambari and restart YARN (also the pig changes described above to enable Tez if you are on 2.2)
+- Make the below YARN config changes via Ambari and restart YARN (also the pig changes described above to enable Tez if you are on 2.2)
 ```
 yarn.nodemanager.resource.memory-mb = 9216 
 yarn.scheduler.minimum-allocation-mb = 1536
 yarn.scheduler.maximum-allocation-mb = 9216
 ```
+- Make the below Pig config change to enable Tez and the restart Pig.
+```
+#exectype=mapreduce
+exectype=tez
+```
+![Image](../master/screenshots/pig-tez.png?raw=true)
+
+- Also shutdown any components not needed for this demo to conserve memory (e.g. Falcon, Oozie, Knox, Kafka etc)
 
 - Create demo user
 ```
@@ -138,7 +135,7 @@ sudo /home/demo/hdp-datascience-demo/step1_runasroot.sh
 /home/demo/hdp-datascience-demo/step3_setupairlinedemo.sh
 ```
 
-##### Launch demo on HDP 2.2
+##### Launch demo
 
 - To run the python demo execute below as demo user, then point your browser to port where ipython notebook starts on and open airline_python.ipynb 
 e.g. http://sandbox.hortonworks.com:9999
@@ -166,27 +163,6 @@ source ~/.bashrc
 cd /home/demo/hdp-datascience-demo/demo-HDP2.2
 ipython notebook --profile spark
 ```
-
-##### Launch demo on HDP 2.1
-
-To run the python demo execute below then point your browser to port where ipython notebook starts on and open airline_python.ipynb
-e.g. http://sandbox.hortonworks.com:9999
-```
-
-source ~/.bashrc
-cd /home/demo/hdp-datascience-demo/demo
-ipython notebook
-```
-
-To run the Scala/Spark demo execute below then point your browser to port where ipython notebook starts on and open airline_spark.ipynb
-e.g. http://sandbox.hortonworks.com:9999
-```
-source ~/.bashrc
-cd /home/demo/hdp-datascience-demo/demo
-ipython notebook --profile spark
-```
-
-![Image](../master/screenshots/ipython-notebook-home.png?raw=true)
 
 
 ##### iPython Notebook embedded in Ambari View
