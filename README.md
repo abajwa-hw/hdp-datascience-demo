@@ -15,20 +15,44 @@ More details can be found on the below Hortonworks blog posts:
 To get a better understanding of machine learning and how the models below work:
 - https://www.coursera.org/course/ml
 
+Version of these instructions that works with older versions of HDP as available [here]()
+
 ##### Setup VM - Option 1: Import prebuilt VM
-There is a prebuilt VM with the demo running on a HDP 2.1 sandbox [here](https://dl.dropboxusercontent.com/u/114020/Hortonworks_Sandbox_2.1_MLdemo.ova) - (R/scalding not available on this one yet)
+There is a prebuilt VM with the demo running on a HDP 2.2 sandbox [here](https://www.dropbox.com/s/0jkwsijptavrrtu/Sandbox_HDP_2.2_VMware_ML_airlinedemo.ova?dl=0) 
 
-You can simply import it into VMware Fusion, start the VM and follow the instructions in the readme under /root. You do not need to follow the rest of the instructions below.
+- You can simply import it into VMware Fusion, start the VM and follow the instructions below to start the notebook you want (you can ignore the section below for setting up the demo)
 
-A version of the demo VM running on HDP 2.2 sandbox is currently being worked on 
+```
+su demo
 
-##### Setup VM - Option 2: Setup demo on HDP 2.1 sandbox VM
+#only needed prior to starting R notebook
+./setup_env.sh
 
-- Download HDP 2.1 sandbox VM image (Hortonworks_Sandbox_2.1.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
-- Import Hortonworks_Sandbox_2.1.ova into VMWare
-- Now follow demo setup instructions below
+#to start python or R notebook (port 9999)
+./start_python_Rscalding_notebook.sh
 
-##### Setup VM - Option 3: Setup demo on HDP 2.2 sandbox VM - Python, Spark and R/Scalding demos all working
+#to start spark notebook (port 9998)
+./start_spark_notebook.sh
+
+```
+
+- Now launch the corresponding notebook by either opening the Ambari view or in a new browser window (e.g. http://sandbox.hortonworks.com:9999) and start executing the cells
+![Image](../master/screenshots/noteboook-in-ambari.png?raw=true)
+
+- For the Python version of the demo, you can track progress of the Pig jobs using the Tez view
+![Image](../master/screenshots/tez-ui-1.png?raw=true)
+
+![Image](../master/screenshots/tez-ui-2.png?raw=true)
+
+- For the Scala/Spark version of the demo, you can track progress of the jobs using the Spark webui
+![Image](../master/screenshots/spark-webui.png?raw=true)
+
+- For the R/scalding version of the demo, you can track progress of the Map/Reduce using the YARN Resource Manager webui
+![Image](../master/screenshots/mapreduce-webui.png?raw=true)
+
+-----------------------
+
+##### Setup VM - Option 2: Setup demo on HDP 2.2 sandbox VM - Python, Spark and R/Scalding demos all working
 
 - Download HDP 2.2 sandbox VM image (Sandbox_HDP_2.2_VMware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Sandbox_HDP_2.2_VMware.ova into VMWare
