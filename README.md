@@ -44,7 +44,7 @@ su demo
 
 ![Image](../master/screenshots/tez-ui-2.png?raw=true)
 
-- For the Scala/Spark version of the demo, you can track progress of the jobs using the Spark webui
+- For the Scala/Spark version of the demo, you can track progress of the jobs using the Spark webui which can be found via the [YARN Resource Manager webui](http://sandbox.hortonworks.com:8088)
 ![Image](../master/screenshots/spark-webui.png?raw=true)
 
 - For the R/scalding version of the demo, you can track progress of the Map/Reduce using the [YARN Resource Manager webui](http://sandbox.hortonworks.com:8088)
