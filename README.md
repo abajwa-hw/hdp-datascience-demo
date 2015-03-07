@@ -17,6 +17,12 @@ To get a better understanding of machine learning and how the models below work:
 
 Previous version of these instructions that works with older versions of HDP are available [here](https://github.com/abajwa-hw/hdp-datascience-demo/tree/master/older-versions)
 
+##### Setup options
+- [Prebuilt sandbox VM](https://github.com/abajwa-hw/hdp-datascience-demo#setup-vm---option-1-import-prebuilt-vm)
+- [Automated scripts to setup demo](https://github.com/abajwa-hw/hdp-datascience-demo#launch-demo-on-hdp-22)
+
+-------------------------
+
 ##### Setup VM - Option 1: Import prebuilt VM
 There is a prebuilt VM with the demo running on a HDP 2.2 sandbox [here](https://www.dropbox.com/s/0jkwsijptavrrtu/Sandbox_HDP_2.2_VMware_ML_airlinedemo.ova?dl=0) 
 
