@@ -47,7 +47,7 @@ su demo
 - For the Scala/Spark version of the demo, you can track progress of the jobs using the Spark webui
 ![Image](../master/screenshots/spark-webui.png?raw=true)
 
-- For the R/scalding version of the demo, you can track progress of the Map/Reduce using the [YARN Resource Manager webui](http://sandbox.hortonwork.com:8088)
+- For the R/scalding version of the demo, you can track progress of the Map/Reduce using the [YARN Resource Manager webui](http://sandbox.hortonworks.com:8088)
 ![Image](../master/screenshots/mapreduce-webui.png?raw=true)
 
 -----------------------
