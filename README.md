@@ -96,7 +96,6 @@ exectype=tez
 
 - Create demo user
 ```
-
 #add demo user and create home dir
 useradd -m -d /home/demo -G users demo 
 echo "demo:demo" | chpasswd
