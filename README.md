@@ -15,7 +15,7 @@ More details can be found on the below Hortonworks blog posts:
 To get a better understanding of machine learning and how the models below work:
 - https://www.coursera.org/course/ml
 
-Version of these instructions that works with older versions of HDP as available [here]()
+Version of these instructions that works with older versions of HDP as available [here](https://github.com/abajwa-hw/hdp-datascience-demo/tree/master/older-versions)
 
 ##### Setup VM - Option 1: Import prebuilt VM
 There is a prebuilt VM with the demo running on a HDP 2.2 sandbox [here](https://www.dropbox.com/s/0jkwsijptavrrtu/Sandbox_HDP_2.2_VMware_ML_airlinedemo.ova?dl=0) 
