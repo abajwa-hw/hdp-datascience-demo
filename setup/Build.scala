@@ -100,7 +100,7 @@ object ScaldingBuild extends Build {
     testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oF"),
 
     // Uncomment if you don't want to run all the tests before building assembly
-    // test in assembly := {},
+    test in assembly := {},
     logLevel in assembly := Level.Warn,
 
     // Publishing options:
