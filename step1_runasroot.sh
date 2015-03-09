@@ -1,11 +1,13 @@
+export HDP_VER=`ls /usr/hdp/ | grep 2`
 
-if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+#for 2.2 onwards
+if [ -e /usr/hdp/$HDP_VER/hadoop/bin/hdfs ]
 then
 	echo "Stopping Oozie..."
-	su -l oozie -c "cd /var/log/oozie; /usr/hdp/2.2.0.0-2041/oozie/bin/oozied.sh stop"
+	su -l oozie -c "cd /var/log/oozie; /usr/hdp/$HDP_VER/oozie/bin/oozied.sh stop"
 
 	echo "Stopping WebHCat..."
-	su -l hcat -c "/usr/hdp/2.2.0.0-2041/hive-hcatalog/sbin/webhcat_server.sh stop"
+	su -l hcat -c "/usr/hdp/$HDP_VER/hive-hcatalog/sbin/webhcat_server.sh stop"
 
 	echo "Stopping Hive..."
 	ps aux | awk '{print $1,$2}' | grep hive | awk '{print $2}' | xargs kill >/dev/null 2>&1
@@ -60,10 +62,11 @@ fi
 yum install R readline-devel python-devel -y
 export HADOOP_CMD=/usr/bin/hadoop 
 #export HADOOP_STREAMING=/usr/lib/hadoop/contrib/streaming/hadoop-streaming.jar
-echo ". /usr/hdp/2.2.0.0-2041/hadoop/libexec/hadoop-config.sh --config /etc/hadoop/conf" >> /etc/profile.d/r.sh
+echo ". /usr/hdp/$HDP_VER/hadoop/libexec/hadoop-config.sh --config /etc/hadoop/conf" >> /etc/profile.d/r.sh
 
 Rscript -e 'install.packages(c("Rcpp", "RJSONIO", "bitops", "digest", "functional", "reshape2", "stringr", "plyr", "caTools", "rJava", "Hmisc", "plyr", "dplyr", "devtools", "Rook", "R.methodsS3"), repos="http://cran.us.r-project.org");' 
 Rscript -e 'install.packages(c("nnet", "randomForest", "rpart", "C50", "gbm", "e1071", "glmnet", "bnlearn", "cluster", "bigrf", "biclust","data.table"), repos="http://cran.us.r-project.org");'
+Rscript -e 'install.packages(c("RJDBC"), repos="http://cran.us.r-project.org");'
 
 wget http://goo.gl/Y5ytsm
 mv Y5ytsm rmr2_3.3.0.tar

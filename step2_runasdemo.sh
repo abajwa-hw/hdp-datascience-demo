@@ -3,6 +3,7 @@ set -e
 #HOME_DIR=$1
 export HOME_DIR=/home/demo
 export PROJECT_DIR=$HOME_DIR/hdp-datascience-demo
+export HDP_VER=`ls /usr/hdp/ | grep 2`
 
 export M2_HOME=/usr/share/maven/latest
 export M2=$M2_HOME/bin
@@ -14,10 +15,10 @@ echo 'PATH=$PATH:$M2' >> ~/.bashrc
 
 
 #2.2 specific vars that need to be set
-if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+if [ -e /usr/hdp/$HDP_VER/hadoop/bin/hdfs ]
 then
-	export HADOOP_HOME=/usr/hdp/2.2.0.0-2041/hadoop
-	export HADOOP_VERSION=2.6.0.2.2.0.0-2041
+	export HADOOP_HOME=/usr/hdp/$HDP_VER/hadoop
+	export HADOOP_VERSION=2.6.0.$HDP_VER
 	export HDP_VERSION=2.2
 	export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk.x86_64
 	
@@ -118,7 +119,7 @@ pip install matplotlib
 #Install PYDOOP – package to enable Hadoop access from Python.
 echo "Installing pydoop..."
 
-if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+if [ -e /usr/hdp/$HDP_VER/hadoop/bin/hdfs ]
 then
 	git clone https://github.com/crs4/pydoop.git
 	cd pydoop
@@ -162,7 +163,7 @@ echo "c.NotebookApp.webapp_settings = {'headers': {'X-Frame-Options': 'ALLOW-FRO
 
 echo "Downloading Spark..."
 cd
-if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+if [ -e /usr/hdp/$HDP_VER/hadoop/bin/hdfs ]
 then
 
 	#follow instructions from 2.2 Spark TP
@@ -179,8 +180,8 @@ then
 	export SPARK_HOME=$HOME_DIR/spark-1.2
 	echo "export SPARK_HOME=$HOME_DIR/spark-1.2" >> ~/.bashrc
 		
-	echo "spark.driver.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf 
-	echo "spark.yarn.am.extraJavaOptions -Dhdp.version=2.2.0.0-2041" >> $SPARK_HOME/conf/spark-defaults.conf
+	echo "spark.driver.extraJavaOptions -Dhdp.version=$HDP_VER" >> $SPARK_HOME/conf/spark-defaults.conf 
+	echo "spark.yarn.am.extraJavaOptions -Dhdp.version=$HDP_VER" >> $SPARK_HOME/conf/spark-defaults.conf
 	
 
 

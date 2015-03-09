@@ -1,5 +1,6 @@
 export HOME_DIR=/home/demo
 export PROJECT_DIR=$HOME_DIR/hdp-datascience-demo
+export HDP_VER=`ls /usr/hdp/ | grep 2`
 
 #create HDFS dirs
 sudo -u hdfs hadoop fs -mkdir /user/demo
@@ -43,23 +44,37 @@ echo "The demo setup is complete"
 echo "To run the python demo execute"
 echo "source ~/.bashrc"
 
-if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+if [ -e /usr/hdp/$HDP_VER/hadoop/bin/hdfs ]
 then
 	echo "cd /home/demo/hdp-datascience-demo/demo-HDP2.2"
 else
 	echo "cd /home/demo/hdp-datascience-demo/demo"
 fi		
 echo "ipython notebook"
-echo "Then navigate to http://sandbox.hortonworks.com:<port>"
+echo "Then navigate to http://sandbox.hortonworks.com:9999 and open airline_python.ipynb"
 echo ""
 echo "To run the Scala/Spark demo execute"
 echo "source ~/.bashrc"
-if [ -e /usr/hdp/2.2.0.0-2041/hadoop/bin/hdfs ]
+if [ -e /usr/hdp/$HDP_VER/hadoop/bin/hdfs ]
 then
 	echo "cd /home/demo/hdp-datascience-demo/demo-HDP2.2"
 else
 	echo "cd /home/demo/hdp-datascience-demo/demo"
 fi	
 echo "ipython notebook --profile spark"
-echo "Then navigate to http://sandbox.hortonworks.com:<port>"
+echo "Then navigate to http://sandbox.hortonworks.com:9998 and open airline_spark.ipynb"
+
+
+echo ""
+echo "To run the R/Scalding demo execute"
+echo "source ~/.bashrc"
+echo "R CMD javareconf -e"
+if [ -e /usr/hdp/$HDP_VER/hadoop/bin/hdfs ]
+then
+	echo "cd /home/demo/hdp-datascience-demo/demo-HDP2.2"
+else
+	echo "cd /home/demo/hdp-datascience-demo/demo"
+fi	
+echo "ipython notebook"
+echo "Then navigate to http://sandbox.hortonworks.com:9999 and open airline_Scalding_R.ipynb"
 
