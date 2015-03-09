@@ -204,18 +204,19 @@ sed -i "s/1.1.1/1.2.1/g" pom.xml
 mvn package
 source ../pyenv/bin/activate
 ipython profile create spark
+export ISPARK_CORE_ASSEMBLY=`find ~ -iname 'ispark-core-assembly*.jar'`
+export SPARK_CONFIG_FILE=$HOME_DIR/.ipython/profile_spark/ipython_config.py
 
-
-echo "import os" >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
-echo "SPARK_HOME = os.environ['SPARK_HOME']" >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
-echo "MASTER = 'yarn-client'" >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
-#echo 'c.KernelManager.kernel_cmd = [SPARK_HOME+"/bin/spark-submit",   "--master", MASTER,  "--class", "org.tribbloid.ispark.Main",   "--executor-memory", "2G", "$HOME_DIR/ISpark/core/target/ispark-core-assembly-0.1.0-SNAPSHOT.jar",   "--profile", "{connection_file}",  "--interp", "Spark",  "--parent"]' >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
-echo 'c.KernelManager.kernel_cmd = [SPARK_HOME+"/bin/spark-submit",   "--master", MASTER,  "--class", "org.tribbloid.ispark.Main",   "--executor-memory", "2G", "/home/demo/ISpark/core/target/ispark-core-assembly-0.1.0-SNAPSHOT.jar",   "--profile", "{connection_file}",  "--interp", "Spark",  "--parent"]' >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
-echo "c.NotebookApp.ip = '*' " >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
-echo "c.NotebookApp.open_browser = False" >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
-echo "c.NotebookApp.port = 9998" >> $HOME_DIR/.ipython/profile_spark/ipython_config.py
-echo "c.NotebookApp.tornado_settings = {'headers': {'Content-Security-Policy': '' } }" >>  $HOME_DIR/.ipython/profile_spark/ipython_config.py
-echo "c.NotebookApp.webapp_settings = {'headers': {'X-Frame-Options': 'ALLOW-FROM all'}}" >>  $HOME_DIR/.ipython/profile_spark/ipython_config.py
+echo "import os" >> $SPARK_CONFIG_FILE
+echo "SPARK_HOME = os.environ['SPARK_HOME']" >> $SPARK_CONFIG_FILE
+echo "MASTER = 'yarn-client'" >> $SPARK_CONFIG_FILE
+echo "ISPARK_CORE_ASSEMBLY = '$ISPARK_CORE_ASSEMBLY'" >> $SPARK_CONFIG_FILE
+echo 'c.KernelManager.kernel_cmd = [SPARK_HOME+"/bin/spark-submit",   "--master", MASTER,  "--class", "org.tribbloid.ispark.Main",   "--executor-memory", "2G", ISPARK_CORE_ASSEMBLY,   "--profile", "{connection_file}",   "--parent"]' >> $SPARK_CONFIG_FILE
+echo "c.NotebookApp.ip = '*' " >> $SPARK_CONFIG_FILE
+echo "c.NotebookApp.open_browser = False" >> $SPARK_CONFIG_FILE
+echo "c.NotebookApp.port = 9998" >> $SPARK_CONFIG_FILE
+echo "c.NotebookApp.tornado_settings = {'headers': {'Content-Security-Policy': '' } }" >>  $SPARK_CONFIG_FILE
+echo "c.NotebookApp.webapp_settings = {'headers': {'X-Frame-Options': 'ALLOW-FROM all'}}" >>  $SPARK_CONFIG_FILE
 
 
 
