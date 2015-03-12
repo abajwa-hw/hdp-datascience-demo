@@ -183,8 +183,12 @@ then
 	echo "spark.driver.extraJavaOptions -Dhdp.version=$HDP_VER" >> $SPARK_HOME/conf/spark-defaults.conf 
 	echo "spark.yarn.am.extraJavaOptions -Dhdp.version=$HDP_VER" >> $SPARK_HOME/conf/spark-defaults.conf
 	
-
-
+	#set pyspark env vars
+	export PYSPARK_SUBMIT_ARGS="--master yarn-client"
+	export PYSPARK_PYTHON="python2.7"
+	
+	echo 'export PYSPARK_SUBMIT_ARGS="--master yarn-client"' >> ~/.bashrc
+	echo 'export PYSPARK_PYTHON="python2.7"' >>  ~/.bashrc
 
 else
 	wget http://public-repo-1.hortonworks.com/HDP-LABS/Projects/spark/1.1.0/spark-1.1.0.2.1.5.0-702-bin-2.4.0.2.1.5.0-695.tgz
