@@ -224,13 +224,16 @@ echo "c.NotebookApp.webapp_settings = {'headers': {'X-Frame-Options': 'ALLOW-FRO
 
 
 
-#configure ~/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "import os" > $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "import sys" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "spark_home = os.environ.get('SPARK_HOME', None) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "sys.path.insert(0, os.path.join(spark_home, 'python')) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "sys.path.insert(0, os.path.join(spark_home, 'python/lib/py4j-0.8.1-src.zip')) " >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
-echo "execfile(os.path.join(spark_home, 'python/pyspark/shell.py'))" >> $HOME_DIR/.ipython/profile_spark/startup/00-pyspark-setup.py
+#configure ~/.ipython/profile_default/startup/00-pyspark-setup.py
+export PYSPARK_CONFIG_FILE=$HOME_DIR/.ipython/profile_default/00-pyspark-setup.py
+echo "import os" > $PYSPARK_CONFIG_FILE
+echo "import sys" >> $PYSPARK_CONFIG_FILE
+echo "import glob" >> $PYSPARK_CONFIG_FILE
+echo "if not spark_home: raise ValueError('SPARK_HOME environment variable is not set')" >> $PYSPARK_CONFIG_FILE
+echo "sys.path.insert(0, os.path.join(spark_home, 'python')) " >> $PYSPARK_CONFIG_FILE
+echo "for lib in glob.glob(os.path.join(spark_home, 'python/lib/py4j-*-src.zip')):" >> $PYSPARK_CONFIG_FILE
+echo "   sys.path.insert(0, lib)" >> $PYSPARK_CONFIG_FILE
+echo "execfile(os.path.join(spark_home, 'python/pyspark/shell.py'))" >> $PYSPARK_CONFIG_FILE
 
 
 
