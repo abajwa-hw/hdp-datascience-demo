@@ -3,7 +3,7 @@ set -e
 #HOME_DIR=$1
 export HOME_DIR=/home/demo
 export PROJECT_DIR=$HOME_DIR/hdp-datascience-demo
-export HDP_VER=`ls /usr/hdp/ | grep 2`
+export HDP_VER=`hdp-select status hadoop-client | sed 's/hadoop-client - \(.*\)/\1/'`
 
 export M2_HOME=/usr/share/maven/latest
 export M2=$M2_HOME/bin
