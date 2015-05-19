@@ -12,6 +12,11 @@ More details can be found on the below Hortonworks blog posts:
 - http://hortonworks.com/blog/data-science-hadoop-spark-scala-part-2/
 - http://hortonworks.com/blog/data-science-hadoop-predicting-airline-delays-part-3/
 
+- Read only versions of these notebooks can be browsed below:
+  - [Python/scikit learn](http://nbviewer.ipython.org/github/abajwa-hw/hdp-datascience-demo/blob/master/demo-HDP2.2/airline_python.ipynb)
+  - [Spark/Scala](http://nbviewer.ipython.org/github/abajwa-hw/hdp-datascience-demo/blob/master/demo-HDP2.2/airline_spark.ipynb)
+  - [R/scalding](http://nbviewer.ipython.org/github/abajwa-hw/hdp-datascience-demo/blob/master/demo-HDP2.2/airline_Scalding_R.ipynb)
+  
 To get a better understanding of machine learning and how the models below work:
 - https://www.coursera.org/course/ml
 
