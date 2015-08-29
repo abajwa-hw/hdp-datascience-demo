@@ -14,12 +14,12 @@ echo 'M2=$M2_HOME/bin' >> ~/.bashrc
 echo 'PATH=$PATH:$M2' >> ~/.bashrc
 
 
-#2.2 specific vars that need to be set
+#2.2+ specific vars that need to be set
 if [ -e /usr/hdp/$HDP_VER/hadoop/bin/hdfs ]
 then
 	export HADOOP_HOME=/usr/hdp/$HDP_VER/hadoop
 	export HADOOP_VERSION=2.6.0.$HDP_VER
-	export HDP_VERSION=2.2
+	export HDP_VERSION=`hdp-select status hadoop-client | sed 's/hadoop-client - \([0-9]\.[0-9]\).*/\1/'`
 	export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk.x86_64
 	
 	#export HADOOP_HOME=/usr/hdp/current/hadoop-client
